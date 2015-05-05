@@ -4,13 +4,15 @@ return array(
     # definir e gerenciar controllers
     'controllers' => array(
         'invokables' => array(
-            'HomeController' => 'Aluno\Controller\HomeController'
+            'HomeController' => 'Aluno\Controller\HomeController',
+            'AlunosController' => 'Aluno\Controller\AlunosController',
         ),
     ),
  
     # definir e gerenciar rotas
     'router' => array(
         'routes' => array(
+            
             'home' => array(
                 'type'      => 'Literal',
                 'options'   => array(
@@ -21,7 +23,36 @@ return array(
                     ),
                 ),
             ),
-        ),
+            
+             'sobre' => array(
+                'type'      => 'Literal',
+                'options'   => array(
+                    'route'    => '/sobre',
+                    'defaults' => array(
+                        'controller' => 'HomeController',
+                        'action'     => 'sobre',
+                    ),
+                ),
+            ),
+            
+            
+
+             'alunos' => array(
+                'type'      => 'Segment',
+                'options'   => array(
+                    'route'    => '/alunos[/:action][/:id]',
+                    'constraints' => array(
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
+                     ),
+                'defaults' => array(
+                       'controller' => 'AlunosController',
+                       'action'     => 'index',
+                     ),
+                ),
+            ),
+            
+       ),
     ),
  
     # definir e gerenciar servicos

@@ -11,4 +11,9 @@ class HomeController extends AbstractActionController
     {
         return new ViewModel();
     }
+    
+    public function sobreAction()
+    {
+        return new ViewModel();
+    }
 }
