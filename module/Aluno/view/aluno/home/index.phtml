@@ -1,0 +1,68 @@
+<div class="topo-table">
+    <a class="btn btn-success" title="Novo"><span class="glyphicon glyphicon-plus"></span></a>
+ 
+    <div class="btn-group" title="Quantidades por Página">
+        <button type="button" class="btn btn-default">005</button>
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu pull-right" style="min-width: 75px" role="menu">
+            <li class="active"><a href="#">005</a></li>
+            <li><a href="#">010</a></li>
+            <li><a href="#">025</a></li>
+            <li><a href="#">050</a></li>
+            <li><a href="#">100</a></li>
+        </ul>
+    </div>
+ 
+    <form class="form-inline pull-right" role="form">
+        <div class="form-group">
+            <label class="sr-only" for="localizar">Buscar...</label>
+            <input type="search" class="form-control" id="localizar" placeholder="Bucar...">
+        </div>
+        <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+    </form>
+</div>
+ 
+<br />
+ 
+<div class="corpo-table">
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nome</th>
+                <th>Tel. Principal</th>
+                <th>Tel. Qua.</th>
+                <th>Data Criação</th>  
+                <th>Ação</th>  
+            </tr>
+        </thead>
+ 
+        <tbody>
+            <?php for ($i = 1; $i <= 5; $i++): ?>
+                <tr>
+                    <td><?php echo $i; ?></td>
+                    <td>Nilton Morais</td>
+                    <td>(073)9135-4872</td>
+                    <td class="text-center">2</td>
+                    <td><?php echo $this->dateFormat(new DateTime(), IntlDateFormatter::SHORT); ?></td>
+                    <td>
+                        <a class="btn btn-xs btn-info" title="Visualizar" href=""><span class="glyphicon glyphicon-new-window"></span></a>
+                        <a class="btn btn-xs btn-warning" title="Editar" href=""><span class="glyphicon glyphicon-edit"></span></a>
+                        <a class="btn btn-xs btn-danger" title="Deletar" href=""><span class="glyphicon glyphicon-floppy-remove"></span></a>
+                    </td>
+                </tr>
+            <?php endfor; ?>
+        </tbody>
+    </table>
+ 
+    <ul class="pagination pull-right">
+        <li><a href="#">Anterior</a></li>
+        <li class="active"><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">Próximo</a></li>
+    </ul>
+</div>
