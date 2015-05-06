@@ -2,6 +2,12 @@
 
 namespace Aluno;
 
+use Zend\Db\ResultSet\ResultSet,
+    Zend\Db\TableGateway\TableGateway;
+
+use Aluno\Model\Aluno,
+    Aluno\Model\AlunoTable;
+
 class Module
 {
 
@@ -22,6 +28,29 @@ class Module
     }
     
   
+    public function getServiceConfig()
+    {
+        return array(
+            'factories' => array(
+                'AlunoTableGateway' => function ($sm) {
+                    // obter adapter db atraves do service manager
+                    $adapter = $sm->get('AdapterDb');
+
+                    // configurar ResultSet com nosso model Aluno
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Aluno());
+
+                    // return TableGateway configurado para nosso model Contato
+                    return new TableGateway('alunos', $adapter, null, $resultSetPrototype);
+                },
+                    'ModelAluno' => function ($sm) {
+                     return new AlunoTable($sm->get('AlunoTableGateway'));
+                },   
+            )
+        );
+    }
+    
+    
     public function getViewHelperConfig()
     {
         return array(
@@ -35,5 +64,7 @@ class Module
             )
         );
     }
+    
+    
     
 }

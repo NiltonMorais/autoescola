@@ -3,12 +3,15 @@
 namespace Aluno\Controller;
  
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
  
 class AlunosController extends AbstractActionController
 {
-   
+    protected $alunoTable;
+    
     public function indexAction()
     {
+        return new ViewModel(array('alunos' => $this->getAlunoTable()->fetchAll()));
     }
  
  
@@ -54,63 +57,58 @@ class AlunosController extends AbstractActionController
     
     public function detalhesAction()
     {
-        // filtra id passsado pela url
-    $id = (int) $this->params()->fromRoute('id', 0);
- 
-    // se id = 0 ou não informado redirecione para contatos
-    if (!$id) {
-        // adicionar mensagem
-        $this->flashMessenger()->addMessage("Aluno não encotrado");
- 
-        // redirecionar para action index
-        return $this->redirect()->toRoute('alunos');
-    }
- 
-    // aqui vai a lógica para pegar os dados referente ao contato
-    // 1 - solicitar serviço para pegar o model responsável pelo find
-    // 2 - solicitar form com dados desse contato encontrado
-    // formulário com dados preenchidos
-    $form = array(
-        'nome' => 'Igor Rocha',
-        "telefone_principal" => "(085) 8585-8585",
-        "telefone_secundario" => "(085) 8585-8585",
-        "data_criacao" => "02/03/2013",
-        "data_atualizacao" => "02/03/2013",
-        );
- 
-    // dados eviados para detalhes.phtml
-    return array('id' => $id, 'form' => $form);
+            // filtra id passsado pela url
+           $id = (int) $this->params()->fromRoute('id', 0);
+
+           // se id = 0 ou não informado redirecione para alunos
+           if (!$id) {
+               // adicionar mensagem
+               $this->flashMessenger()->addMessage("Aluno não encotrado");
+
+               // redirecionar para action index
+               return $this->redirect()->toRoute('alunos');
+           }
+
+            try{
+                $form = (array)$this->getAlunoTable()->find($id);
+            } catch (Exception $exc) {
+                  // adicionar mensagem
+                $this->flashMessenger()->addErrorMessage($exc->getMessage());
+                // redirecionar para action index
+                 return $this->redirect()->toRoute('alunos');   
+            }
+            
+           // dados eviados para detalhes.phtml
+           return array('id' => $id, 'form' => $form);
     }
  
     
     
     public function editarAction()
     {
-         // filtra id passsado pela url
-    $id = (int) $this->params()->fromRoute('id', 0);
- 
-    // se id = 0 ou não informado redirecione para contatos
-    if (!$id) {
-        // adicionar mensagem de erro
-        $this->flashMessenger()->addMessage("Aluno não encotrado");
- 
-        // redirecionar para action index
-        return $this->redirect()->toRoute('alunos');
-    }
- 
-    // aqui vai a lógica para pegar os dados referente ao contato
-    // 1 - solicitar serviço para pegar o model responsável pelo find
-    // 2 - solicitar form com dados desse contato encontrado
- 
-    // formulário com dados preenchidos
-    $form = array(
-        'nome'                  => 'Igor Rocha',
-        "telefone_principal"    => "(085) 8585-8585",
-        "telefone_secundario"   => "(085) 8585-8585",
-    );
- 
-    // dados eviados para editar.phtml
-    return array('id' => $id, 'form' => $form);
+            // filtra id passsado pela url
+           $id = (int) $this->params()->fromRoute('id', 0);
+
+           // se id = 0 ou não informado redirecione para alunos
+           if (!$id) {
+               // adicionar mensagem de erro
+               $this->flashMessenger()->addMessage("Aluno não encotrado");
+
+               // redirecionar para action index
+               return $this->redirect()->toRoute('alunos');
+           }
+
+            try{
+                $form = (array)$this->getAlunoTable()->find($id);
+            } catch (Exception $exc) {
+                  // adicionar mensagem
+                $this->flashMessenger()->addErrorMessage($exc->getMessage());
+                // redirecionar para action index
+                 return $this->redirect()->toRoute('alunos');   
+            }
+
+           // dados eviados para editar.phtml
+           return array('id' => $id, 'form' => $form);
     }
  
     
@@ -169,5 +167,17 @@ class AlunosController extends AbstractActionController
  
     // redirecionar para action index
     return $this->redirect()->toRoute('alunos');
+    }
+    
+    
+    private function getAlunoTable()
+    {
+       // adicionar service ModelContato a variavel de classe
+        if (!$this->alunoTable) {
+            $this->alunoTable = $this->getServiceLocator()->get('ModelAluno');
+        }
+ 
+        // return vairavel de classe com service ModelContato
+        return $this->alunoTable;
     }
 }

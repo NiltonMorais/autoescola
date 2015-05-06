@@ -9,6 +9,7 @@ class HomeController extends AbstractActionController
   
     public function indexAction()
     {
+        $adapter = $this->getServiceLocator()->get('AdapterDb');
         return new ViewModel();
     }
     

@@ -39,22 +39,23 @@
             </tr>
         </thead>
  
-        <tbody>
-            <?php for ($i = 1; $i <= 5; $i++): ?>
-                <tr>
-                    <td><?php echo $i; ?></td>
-                    <td>Nilton Morais</td>
-                    <td>(073)9135-4872</td>
-                    <td class="text-center">2</td>
-                    <td><?php echo $this->dateFormat(new DateTime(), IntlDateFormatter::SHORT); ?></td>
-                    <td>
-                        <a class="btn btn-xs btn-info" title="Visualizar" href="<?php echo $this->url('alunos', array("action" => "detalhes", "id" => $i,)); ?>"><span class="glyphicon glyphicon-new-window"></span></a>
-                        <a class="btn btn-xs btn-warning" title="Editar" href="<?php echo $this->url('alunos', array("action" => "editar", "id" => $i,)); ?>"><span class="glyphicon glyphicon-edit"></span></a>
-                        <a class="btn btn-xs btn-danger" title="Deletar" href="<?php echo $this->url('alunos', array("action" => "deletar", "id" => $i,)); ?>"><span class="glyphicon glyphicon-floppy-remove"></span></a>
-                    </td>
-                </tr>
-            <?php endfor; ?>
-        </tbody>
+       
+<tbody>
+    <?php foreach ($this->alunos as $aluno) : ?>
+        <tr>
+            <td><?php echo $this->escapeHtml($aluno->id); ?></td>
+            <td><?php echo $this->escapeHtml($aluno->nome); ?></td>
+            <td><?php echo $this->escapeHtml($aluno->telefone); ?></td>
+            <td class="text-center">2</td>
+            <td><?php echo $this->escapeHtml($aluno->data_cadastro); ?></td>
+            <td>
+                <a class="btn btn-xs btn-info" title="Visualizar" href="<?php echo $this->url('alunos', array("action" => "detalhes", "id" => $aluno->id,)); ?>"><span class="glyphicon glyphicon-new-window"></span></a>
+                <a class="btn btn-xs btn-warning" title="Editar" href="<?php echo $this->url('alunos', array("action" => "editar", "id" => $aluno->id,)); ?>"><span class="glyphicon glyphicon-edit"></span></a>
+                <a class="btn btn-xs btn-danger" title="Deletar" href="<?php echo $this->url('alunos', array("action" => "deletar", "id" => $aluno->id,)); ?>"><span class="glyphicon glyphicon-floppy-remove"></span></a>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</tbody>
     </table>
  
     <ul class="pagination pull-right">

@@ -1,21 +1,21 @@
 <div class="panel panel-primary">
     <div class="panel-heading">
         <div class="panel-title">
-            Detalhes Aluno ID <?php echo $this->id; ?>            
+            Detalhes Aluno ID <?php echo $this->escapeHtml($this->id); ?>            
         </div>
     </div>
     <div class="panel-body">
         <dl class="dl-horizontal">
             <dt>Nome:</dt>
-            <dd><?php echo $this->form["nome"]; ?></dd>
+            <dd><?php echo $this->escapeHtml($this->form["nome"]); ?></dd>
             <dt>Telefone Principal:</dt>
-            <dd><?php echo $this->form["telefone_principal"]; ?></dd>
+            <dd><?php echo $this->escapeHtml($this->form["telefone"]); ?></dd>
             <dt>Telefone Secundario:</dt>
-            <dd><?php echo $this->form["telefone_secundario"]; ?></dd>
+            <dd><?php echo $this->escapeHtml($this->form["telefone2"]); ?></dd>
             <dt>Data Criação:</dt>
-            <dd><?php echo $this->form["data_criacao"]; ?></dd>
+            <dd><?php echo $this->escapeHtml($this->form["data_cadastro"]); ?></dd>
             <dt>Data Atualização:</dt>
-            <dd><?php echo $this->form["data_atualizacao"]; ?></dd>
+            <dd><?php echo $this->escapeHtml($this->form["data_alteracao"]); ?></dd>
         </dl>
     </div>
     <div class="panel-footer">
