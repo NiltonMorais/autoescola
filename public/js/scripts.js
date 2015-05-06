@@ -10,3 +10,11 @@ $(function () {
         // gerar efeito para o elemento encontrado na pagina
         corpo_alert.fadeOut().fadeIn().fadeOut().fadeIn();
 });
+
+/**
+ * mask input
+ */
+$(function (){
+    // mascara para telefone: (xx) xxxx-xxxxx
+    $("input#telefone, input#telefone2").mask("(99) 9999-9999?9");
+});

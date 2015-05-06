@@ -4,6 +4,8 @@ namespace Aluno\Controller;
  
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Aluno\Form\Aluno as AlunoForm;
+use Aluno\Model\Aluno as AlunoM;
  
 class AlunosController extends AbstractActionController
 {
@@ -18,37 +20,31 @@ class AlunosController extends AbstractActionController
     
     public function novoAction()
     {
+        return ['formAluno' => new AlunoForm()];
     }
  
     
     
     public function adicionarAction()
     {
-         // obtém a requisição
-    $request = $this->getRequest();
+         $request = $this->getRequest();
  
-    // verifica se a requisição é do tipo post
-    if ($request->isPost()) {
-        // obter e armazenar valores do post
-        $postData = $request->getPost()->toArray();
-        $formularioValido = false;
- 
-        // verifica se o formulário segue a validação proposta
-        if ($formularioValido) {
-            // aqui vai a lógica para adicionar os dados à tabela no banco
-            // 1 - solicitar serviço para pegar o model responsável pela adição
-            // 2 - inserir dados no banco pelo model
-            // adicionar mensagem de sucesso
+        if ($request->isPost()) {
+            $form = new AlunoForm();
+            $form->setData($request->getPost());
+            $modelAluno = new AlunoM();
+        if ($form->isValid()) {
+            
+            $modelAluno->exchangeArray($form->getData());
+            $this->getAlunoTable()->save($modelAluno);
+            
             $this->flashMessenger()->addSuccessMessage("Aluno criado com sucesso");
- 
-            // redirecionar para action index no controller contatos
             return $this->redirect()->toRoute('alunos');
         } else {
-            // adicionar mensagem de erro
             $this->flashMessenger()->addErrorMessage("Erro ao criar contato");
- 
-            // redirecionar para action novo no controllers contatos
-            return $this->redirect()->toRoute('alunos', array('action' => 'novo'));
+           return (new ViewModel())
+                            ->setVariable('formAluno', $form)
+                            ->setTemplate('aluno/alunos/novo');
         }
     }
     }
@@ -70,7 +66,7 @@ class AlunosController extends AbstractActionController
            }
 
             try{
-                $form = (array)$this->getAlunoTable()->find($id);
+                $aluno = $this->getAlunoTable()->find($id);
             } catch (Exception $exc) {
                   // adicionar mensagem
                 $this->flashMessenger()->addErrorMessage($exc->getMessage());
@@ -79,67 +75,58 @@ class AlunosController extends AbstractActionController
             }
             
            // dados eviados para detalhes.phtml
-           return array('id' => $id, 'form' => $form);
+           return array('id' => $id, 'aluno' => $aluno);
     }
  
     
     
     public function editarAction()
     {
-            // filtra id passsado pela url
            $id = (int) $this->params()->fromRoute('id', 0);
 
-           // se id = 0 ou não informado redirecione para alunos
            if (!$id) {
-               // adicionar mensagem de erro
                $this->flashMessenger()->addMessage("Aluno não encotrado");
-
-               // redirecionar para action index
                return $this->redirect()->toRoute('alunos');
            }
 
             try{
-                $form = (array)$this->getAlunoTable()->find($id);
+                $aluno = (array)$this->getAlunoTable()->find($id);
             } catch (Exception $exc) {
-                  // adicionar mensagem
                 $this->flashMessenger()->addErrorMessage($exc->getMessage());
-                // redirecionar para action index
                  return $this->redirect()->toRoute('alunos');   
             }
+            
+            $form = new AlunoForm();
+            $form->setData($aluno);
 
-           // dados eviados para editar.phtml
-           return array('id' => $id, 'form' => $form);
+           return ['form' => $form];
     }
  
     
     public function atualizarAction()
     {
-        // obtém a requisição
-    $request = $this->getRequest();
+        $request = $this->getRequest();
+
+        if ($request->isPost()) {
+            $form = new AlunoForm();
+            $modelAluno = new AlunoM();
+            
+            $form->setData($request->getPost());
  
-    // verifica se a requisição é do tipo post
-    if ($request->isPost()) {
-        // obter e armazenar valores do post
-        $postData = $request->getPost()->toArray();
-        $formularioValido = true;
- 
-        // verifica se o formulário segue a validação proposta
-        if ($formularioValido) {
-            // aqui vai a lógica para editar os dados à tabela no banco
-            // 1 - solicitar serviço para pegar o model responsável pela atualização
-            // 2 - editar dados no banco pelo model
- 
-            // adicionar mensagem de sucesso
+       
+        if ($form->isValid()) {
+            $modelAluno->exchangeArray($form->getData());
+            $this->getAlunoTable()->update($modelAluno);
+            
             $this->flashMessenger()->addSuccessMessage("Aluno editado com sucesso");
- 
-            // redirecionar para action detalhes
-            return $this->redirect()->toRoute('alunos', array("action" => "detalhes", "id" => $postData['id'],));
+
+            return $this->redirect()->toRoute('alunos', array("action" => "detalhes", "id" => $modelAluno->id));
         } else {
-            // adicionar mensagem de erro
             $this->flashMessenger()->addErrorMessage("Erro ao editar aluno");
  
-            // redirecionar para action editar
-            return $this->redirect()->toRoute('alunos', array('action' => 'editar', "id" => $postData['id'],));
+           return (new ViewModel())
+                            ->setVariable('form', $form)
+                            ->setTemplate('aluno/alunos/editar');
         }
     }
     }
@@ -147,26 +134,17 @@ class AlunosController extends AbstractActionController
     
     public function deletarAction()
     {
-        // filtra id passsado pela url
-    $id = (int) $this->params()->fromRoute('id', 0);
- 
-    // se id = 0 ou não informado redirecione para contatos
-    if (!$id) {
-        // adicionar mensagem de erro
-        $this->flashMessenger()->addMessage("Aluno não encotrado");
- 
-    } else {
-        // aqui vai a lógica para deletar o contato no banco
-        // 1 - solicitar serviço para pegar o model responsável pelo delete
-        // 2 - deleta contato
- 
-        // adicionar mensagem de sucesso
-        $this->flashMessenger()->addSuccessMessage("Aluno de ID $id deletado com sucesso!");
- 
-    }
- 
-    // redirecionar para action index
-    return $this->redirect()->toRoute('alunos');
+            $id = (int) $this->params()->fromRoute('id', 0);
+
+            if (!$id) {
+                $this->flashMessenger()->addMessage("Aluno não encotrado");
+
+            } else {
+                $this->getAlunoTable()->delete($id);
+                $this->flashMessenger()->addSuccessMessage("Aluno de ID $id deletado com sucesso!");
+            }
+
+            return $this->redirect()->toRoute('alunos');
     }
     
     

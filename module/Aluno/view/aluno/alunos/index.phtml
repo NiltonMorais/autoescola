@@ -43,11 +43,11 @@
 <tbody>
     <?php foreach ($this->alunos as $aluno) : ?>
         <tr>
-            <td><?php echo $this->escapeHtml($aluno->id); ?></td>
-            <td><?php echo $this->escapeHtml($aluno->nome); ?></td>
-            <td><?php echo $this->escapeHtml($aluno->telefone); ?></td>
-            <td class="text-center">2</td>
-            <td><?php echo $this->escapeHtml($aluno->data_cadastro); ?></td>
+            <td><?php echo $this->filter($aluno)->id(); ?></td>
+            <td><?php echo $this->filter($aluno)->nomeSobrenome(); ?></td>
+            <td><?php echo $this->filter($aluno)->telefone(); ?></td>
+            <td class="text-center"><?php echo $this->filter($aluno)->quantidadeTelefones(); ?></td>
+            <td><?php echo $this->filter($aluno)->dataCadastro(); ?></td>
             <td>
                 <a class="btn btn-xs btn-info" title="Visualizar" href="<?php echo $this->url('alunos', array("action" => "detalhes", "id" => $aluno->id,)); ?>"><span class="glyphicon glyphicon-new-window"></span></a>
                 <a class="btn btn-xs btn-warning" title="Editar" href="<?php echo $this->url('alunos', array("action" => "editar", "id" => $aluno->id,)); ?>"><span class="glyphicon glyphicon-edit"></span></a>

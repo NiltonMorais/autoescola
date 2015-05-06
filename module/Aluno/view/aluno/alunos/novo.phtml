@@ -4,32 +4,108 @@
             Novo Aluno           
         </div>
     </div>
+    <?php
+    $formAluno = $this->formAluno;
+    $formAluno->setAttribute('action', $this->url('alunos', array('action' => 'adicionar')));
+    $formAluno->prepare();
+    echo $this->form()->openTag($formAluno);
+    ?>
     <form class="form-horizontal" role="form" method="POST" action="<?php echo $this->url('alunos', array('action' => 'adicionar')); ?>">
         <div class="panel-body">
             <div class="form-group">
-                <label for="inputNome" class="col-lg-3 col-md-3 control-label">Nome:</label>
+                <label for="nome" class="col-lg-3 col-md-3 control-label">Nome:</label>
                 <div class="col-lg-9 col-md-9">
-                    <input type="text" name="nome" class="form-control" id="inputNome" placeholder="Nome Completo">
+                    <?php echo $this->formInput($formAluno->get('nome')); 
+                        // renderiza elemento de erro
+                        echo $this->formElementErrors()
+                        ->setMessageOpenFormat('<small class="text-danger">')
+                        ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                        ->setMessageCloseString('</small>')
+                        ->render($formAluno->get('nome'));
+                    ?>
+                    
                 </div>
             </div>
  
             <div class="form-group">
-                <label for="inputTelefonePrincipal" class="col-lg-3 col-md-3 control-label">Tel. Principal:</label>
+                <label for="email" class="col-lg-3 col-md-3 control-label">Email:</label>
                 <div class="col-lg-9  col-md-9">
-                    <input type="text" name="telefone_principal" class="form-control" id="inputTelefonePrincipal" placeholder="Digite seu telefone principal">
+                    <?php echo $this->formInput($formAluno->get('email'));
+                        // renderiza elemento de erro
+                        echo $this->formElementErrors()
+                        ->setMessageOpenFormat('<small class="text-danger">')
+                        ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                        ->setMessageCloseString('</small>')
+                        ->render($formAluno->get('email'));
+                    ?>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="sexo" class="col-lg-3 col-md-3 control-label">Sexo:</label>
+                <div class="col-lg-9  col-md-9">
+                    <?php echo $this->formInput($formAluno->get('sexo')); 
+                        // renderiza elemento de erro
+                        echo $this->formElementErrors()
+                        ->setMessageOpenFormat('<small class="text-danger">')
+                        ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                        ->setMessageCloseString('</small>')
+                        ->render($formAluno->get('sexo'));
+                    ?>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="data_nascimento" class="col-lg-3 col-md-3 control-label">Data de Nascimento:</label>
+                <div class="col-lg-9  col-md-9">
+                    <?php echo $this->formInput($formAluno->get('data_nascimento')); 
+                        // renderiza elemento de erro
+                        echo $this->formElementErrors()
+                        ->setMessageOpenFormat('<small class="text-danger">')
+                        ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                        ->setMessageCloseString('</small>')
+                        ->render($formAluno->get('data_nascimento'));
+                    ?>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="telefone" class="col-lg-3 col-md-3 control-label">Tel. Principal:</label>
+                <div class="col-lg-9  col-md-9">
+                    <?php echo $this->formInput($formAluno->get('telefone')); 
+                        // renderiza elemento de erro
+                        echo $this->formElementErrors()
+                        ->setMessageOpenFormat('<small class="text-danger">')
+                        ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                        ->setMessageCloseString('</small>')
+                        ->render($formAluno->get('telefone'));
+                    ?>
                 </div>
             </div>
  
             <div class="form-group">
-                <label for="inputTelefoneSecundario" class="col-lg-3 col-md-3 control-label">Tel. Secundário:</label>
+                <label for="telefone2" class="col-lg-3 col-md-3 control-label">Tel. Secundário:</label>
                 <div class="col-lg-9  col-md-9">
-                    <input type="text" name="telefone_secundario" class="form-control" id="inputTelefoneSecundario" placeholder="Digite seu telefone secundário(opcional)">
+                    <?php echo $this->formInput($formAluno->get('telefone2')); 
+                        // renderiza elemento de erro
+                        echo $this->formElementErrors()
+                        ->setMessageOpenFormat('<small class="text-danger">')
+                        ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                        ->setMessageCloseString('</small>')
+                        ->render($formAluno->get('telefone2'));
+                    ?>
                 </div>
             </div>
         </div>
         <div class="panel-footer">
+            <?php
+            // renderiza html input hidden para id
+            echo $this->formHidden($formAluno->get('id'));
+            // renderiza html input hidden csrf
+            echo $this->formElement($formAluno->get('security')); 
+            ?>
             <button type="submit" class="btn btn-primary">Salvar Contato</button>
             <a href="<?php echo $this->url('alunos'); ?>" class="btn btn-default">Voltar</a>
         </div>
-    </form>
+         <?php echo $this->form()->closeTag() ?>
 </div>

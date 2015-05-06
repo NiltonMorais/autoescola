@@ -1,25 +1,33 @@
 <div class="panel panel-primary">
     <div class="panel-heading">
         <div class="panel-title">
-            Detalhes Aluno ID <?php echo $this->escapeHtml($this->id); ?>            
+            Detalhes Aluno ID <?php echo $this->filter($aluno)->id(); ?>      
         </div>
     </div>
     <div class="panel-body">
         <dl class="dl-horizontal">
             <dt>Nome:</dt>
-            <dd><?php echo $this->escapeHtml($this->form["nome"]); ?></dd>
+            <dd><?php echo $this->filter($aluno)->nomeCompleto(); ?></dd>
+            <dt>Email:</dt>
+            <dd><?php echo $this->filter($aluno)->email(); ?></dd>
+            <dt>Sexo:</dt>
+            <dd><?php echo $this->filter($aluno)->sexo(); ?></dd>
+            <dt>Idade:</dt>
+            <dd><?php echo $this->filter($aluno)->idade(); ?></dd>
+            <dt>Data de Nascimento:</dt>
+            <dd><?php echo $this->filter($aluno)->dataNascimento(); ?></dd>
             <dt>Telefone Principal:</dt>
-            <dd><?php echo $this->escapeHtml($this->form["telefone"]); ?></dd>
+            <dd><?php echo $this->filter($aluno)->telefone(); ?></dd>
             <dt>Telefone Secundario:</dt>
-            <dd><?php echo $this->escapeHtml($this->form["telefone2"]); ?></dd>
-            <dt>Data Criação:</dt>
-            <dd><?php echo $this->escapeHtml($this->form["data_cadastro"]); ?></dd>
-            <dt>Data Atualização:</dt>
-            <dd><?php echo $this->escapeHtml($this->form["data_alteracao"]); ?></dd>
+            <dd><?php echo $this->filter($aluno)->telefone2(); ?></dd>
+            <dt>Data de Cadastro:</dt>
+            <dd><?php echo $this->filter($aluno)->dataCadastro(); ?></dd>
+            <dt>Data de Atualização:</dt>
+            <dd><?php echo $this->filter($aluno)->dataAlteracao(); ?></dd>
         </dl>
     </div>
     <div class="panel-footer">
-        <a href="<?php echo $this->url('alunos', array('action' => 'editar', 'id' => $this->id)); ?>" class="btn btn-warning btn-sm">Editar Aluno</a>
+        <a href="<?php echo $this->url('alunos', array('action' => 'editar', 'id' => $this->filter($aluno)->id())); ?>" class="btn btn-warning btn-sm">Editar Aluno</a>
         <a href="<?php echo $this->url('alunos'); ?>" class="btn btn-default btn-sm">Voltar</a>
     </div>
 </div>
