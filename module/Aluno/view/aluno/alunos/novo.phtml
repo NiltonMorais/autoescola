@@ -5,7 +5,7 @@
         </div>
     </div>
     <?php
-    $formAluno = $this->formAluno;
+    $formAluno = $this->form;
     $formAluno->setAttribute('action', $this->url('alunos', array('action' => 'adicionar')));
     $formAluno->prepare();
     echo $this->form()->openTag($formAluno);
