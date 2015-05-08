@@ -1,0 +1,96 @@
+<?php
+$urlPaginator = function($pagina) {
+    $uri = Zend\Uri\UriFactory::factory($this->serverUrl(true));
+    $query = $uri->getQueryAsArray();
+    $query['pagina'] = $pagina;
+    
+    return $this->url($this->route, [], ['query' => $query]);
+};
+?>
+ 
+<?php if ($this->pageCount): ?>
+    <div>
+        <ul class="pagination pagination-sm">
+            <li class="disabled">
+                <a href="#">
+                    Total Páginas: <?php echo $this->pageCount ?>
+                </a>
+            </li>
+            <li class="disabled">
+                <a href="#">
+                    Total Itens: <?php echo $this->totalItemCount ?>
+                </a>
+            </li>
+        </ul>
+        <ul class="pagination pull-right pagination-sm">
+            <!-- Previous page link -->
+            <?php if (isset($this->previous)): ?>
+                <li>
+                    <a href="<?php echo $urlPaginator($this->previous); ?>">
+                        <<
+                    </a>
+                </li>
+            <?php else: ?>
+                <li class="disabled">
+                    <a href="#">
+                        <<
+                    </a>
+                </li>
+            <?php endif; ?>
+ 
+            <!-- First page link -->
+            <?php if (isset($this->previous) && ($this->previous > $this->first + 2)): ?>
+                <li>
+                    <a href="<?php echo $urlPaginator($this->first); ?>">
+                        <?php echo $this->first ?>
+                    </a>
+                </li>
+                <li class="disabled">
+                    <a href="#">...</a>
+                </li>
+            <?php endif; ?>
+ 
+            <!-- Numbered page links -->
+            <?php foreach ($this->pagesInRange as $page): ?>
+                <?php if ($page != $this->current): ?>
+                    <li>
+                        <a href="<?php echo $urlPaginator($page); ?>">
+                            <?php echo $page; ?>
+                        </a>
+                    </li>
+                <?php else: ?>
+                    <li class="active">
+                        <a href="#"><?php echo $page; ?></a>
+                    </li>
+                <?php endif; ?>
+            <?php endforeach; ?>
+ 
+            <!-- Last page link -->
+            <?php if (isset($this->next) && ($this->next + 2 < $this->last)): ?>
+                <li class="disabled">
+                    <a href="#">...</a>
+                </li>
+                <li>
+                    <a href="<?php echo $urlPaginator($this->last); ?>">
+                        <?php echo $this->last ?>
+                    </a>
+                </li>
+            <?php endif; ?>
+ 
+            <!-- Next page link -->
+            <?php if (isset($this->next)): ?>
+                <li>
+                    <a href="<?php echo $urlPaginator($this->next); ?>">
+                        >>
+                    </a>
+                </li>
+            <?php else: ?>
+                <li class="disabled">
+                    <a href="#">
+                        >>
+                    </a>
+                </li>
+            <?php endif; ?>
+        </ul>
+    </div>
+<?php endif; ?>

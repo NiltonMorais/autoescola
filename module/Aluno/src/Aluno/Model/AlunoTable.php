@@ -5,6 +5,13 @@ namespace Aluno\Model;
 use Zend\Db\TableGateway\TableGateway;
 use \Exception;
 
+// import for fetchPaginator
+use Zend\Db\Sql\Select,
+    Zend\Db\ResultSet\HydratingResultSet,
+    Zend\Stdlib\Hydrator\Reflection,
+    Zend\Paginator\Adapter\DbSelect,
+    Zend\Paginator\Paginator;
+
 class AlunoTable {
     protected $tableGateway;
     
@@ -71,4 +78,56 @@ class AlunoTable {
     {
         $this->tableGateway->delete(array('id' => (int) $id));
     }
+    
+    
+    
+
+    /**
+     * Localizar itens por paginação
+     * 
+     * @param type $pagina
+     * @param type $itensPagina
+     * @param type $ordem
+     * @param type $like
+     * @param type $itensPaginacao
+     * @return type Paginator
+     */
+    public function fetchPaginator($pagina = 1, $itensPagina = 10, $ordem = 'nome ASC', $like = null, $itensPaginacao = 5) 
+    {
+
+        $select = (new Select('alunos'))->order($ordem);
+
+        if (isset($like)) {
+            $select
+                    ->where
+                    ->like('id', "%{$like}%")
+                    ->or
+                    ->like('nome', "%{$like}%")
+                    ->or
+                    ->like('telefone', "%{$like}%")
+                    ->or
+                    ->like('data_cadastro', "%{$like}%")
+                    ->or
+            ;
+        }
+
+
+        $resultSet = new HydratingResultSet(new Reflection(), new Aluno());
+
+
+        $paginatorAdapter = new DbSelect(
+            $select,
+            $this->tableGateway->getAdapter(),
+            $resultSet
+        );
+
+        return (new Paginator($paginatorAdapter))
+                // pagina a ser buscada
+                ->setCurrentPageNumber((int) $pagina)
+                // quantidade de itens na página
+                ->setItemCountPerPage((int) $itensPagina)
+                ->setPageRange((int) $itensPaginacao);
+    }
+
+
 }

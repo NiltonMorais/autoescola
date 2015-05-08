@@ -5,7 +5,7 @@ namespace Aluno\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
  
-class CrudController extends AbstractActionController
+abstract class CrudController extends AbstractActionController
 {
     protected $tableGateway;
     protected $serviceTable;
@@ -17,7 +17,24 @@ class CrudController extends AbstractActionController
     
     public function indexAction()
     {
-        return new ViewModel(array('data' => $this->getServiceTable()->fetchAll()));
+        $paramsUrl = [
+            'pagina_atual'  => $this->params()->fromQuery('pagina', 1),
+            'itens_pagina'  => $this->params()->fromQuery('itens_pagina', 10),
+            'coluna_nome'   => $this->params()->fromQuery('coluna_nome', 'nome'),
+            'coluna_sort'   => $this->params()->fromQuery('coluna_sort', 'ASC'),
+            'search'        => $this->params()->fromQuery('search', null),
+        ];
+
+        // configuar método de paginação
+        $paginacao = $this->getServiceTable()->fetchPaginator(
+                /* $pagina */           $paramsUrl['pagina_atual'],
+                /* $itensPagina */      $paramsUrl['itens_pagina'],
+                /* $ordem */            "{$paramsUrl['coluna_nome']} {$paramsUrl['coluna_sort']}",
+                /* $search */           $paramsUrl['search'],
+                /* $itensPaginacao */   5
+        );
+            
+        return new ViewModel(array('data' => $paginacao) + $paramsUrl);
     }
  
  

@@ -1,24 +1,22 @@
 <div class="topo-table">
     <a href="<?php echo $this->url('alunos', array('action' => 'novo')); ?>" class="btn btn-success" title="Novo"><span class="glyphicon glyphicon-plus"></span></a>
  
-    <div class="btn-group" title="Quantidades por Página">
-        <button type="button" class="btn btn-default">005</button>
+    <div class="btn-group" title="Itens por Página">
+        <button type="button" class="btn btn-default"><?php echo $this->itens_pagina?></button>
         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
             <span class="caret"></span>
         </button>
         <ul class="dropdown-menu pull-right" style="min-width: 75px" role="menu">
-            <li class="active"><a href="#">005</a></li>
-            <li><a href="#">010</a></li>
-            <li><a href="#">025</a></li>
-            <li><a href="#">050</a></li>
-            <li><a href="#">100</a></li>
+            <?php foreach (['1','5', '10', '25', '50', '100'] as $value): ?>
+                <li class="<?php echo ($this->itens_pagina == $value ? 'active' : ''); ?>"><a href="<?php echo $this->url('alunos', ['action' => 'index'], ['query' => ['pagina' => $this->pagina_atual, 'coluna_nome' => $coluna_nome, 'coluna_sort' => $this->coluna_sort, 'itens_pagina' => $value, 'search' => $this->search]])?>"><?php echo $value;  ?></a></li>
+            <?php endforeach;?>
         </ul>
     </div>
  
     <form class="form-inline pull-right" role="form">
         <div class="form-group">
             <label class="sr-only" for="localizar">Buscar...</label>
-            <input type="search" class="form-control" id="localizar" placeholder="Bucar...">
+            <input type="search" name="search" value="<?php echo $this->search; ?>" class="form-control" id="localizar" placeholder="Bucar...">
         </div>
         <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
     </form>
@@ -29,21 +27,14 @@
 <div class="corpo-table">
     <table class="table table-striped table-bordered table-hover">
         <thead>
-            <tr>
-                <th>#</th>
-                <th>Nome</th>
-                <th>Tel. Principal</th>
-                <th>Tel. Qua.</th>
-                <th>Data Criação</th>  
-                <th>Ação</th>  
-            </tr>
+            <?php echo $this->partial('partial/colunas_sort'); ?>
         </thead>
  
        
 <tbody>
     <?php foreach ($this->data as $aluno) : ?>
         <tr>
-            <td><?php echo $this->filter($aluno)->id(); ?></td>
+            <td class="text-center"><?php echo $this->filter($aluno)->id(); ?></td>
             <td><?php echo $this->filter($aluno)->nomeSobrenome(); ?></td>
             <td><?php echo $this->filter($aluno)->telefone(); ?></td>
             <td class="text-center"><?php echo $this->filter($aluno)->quantidadeTelefones(); ?></td>
@@ -58,14 +49,25 @@
 </tbody>
     </table>
  
-    <ul class="pagination pull-right">
-        <li><a href="#">Anterior</a></li>
-        <li class="active"><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">Próximo</a></li>
-    </ul>
+    
+
+    <?php
+    // controle de paginação
+    echo $this->paginationControl(
+        // objeto contentdo os contatos
+        $this->data,
+
+        // tipo de style da paginação
+        'Sliding',
+
+        // partial que vai conter o html da paginação
+        [/*path*/ 'partial/paginator.phtml', /*modulo*/ 'Aluno'],
+
+        // link rotas da paginação
+        ['route' => 'alunos']
+    );
+    ?>
+    
 </div>
 
 
