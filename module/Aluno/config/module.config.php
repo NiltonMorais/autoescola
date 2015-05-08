@@ -6,6 +6,7 @@ return array(
         'invokables' => array(
             'HomeController' => 'Aluno\Controller\HomeController',
             'AlunosController' => 'Aluno\Controller\AlunosController',
+            'ContratosController' => 'Aluno\Controller\ContratosController',
         ),
     ),
  
@@ -47,6 +48,20 @@ return array(
                      ),
                 'defaults' => array(
                        'controller' => 'AlunosController',
+                       'action'     => 'index',
+                     ),
+                ),
+            ),
+             'contratos' => array(
+                'type'      => 'Segment',
+                'options'   => array(
+                    'route'    => '/contratos[/:action][/:id]',
+                    'constraints' => array(
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
+                     ),
+                'defaults' => array(
+                       'controller' => 'ContratosController',
                        'action'     => 'index',
                      ),
                 ),

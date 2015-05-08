@@ -8,6 +8,9 @@ use Zend\Db\ResultSet\ResultSet,
 use Aluno\Model\Aluno,
     Aluno\Model\AlunoTable;
 
+use Aluno\Model\Contrato,
+    Aluno\Model\ContratoTable;
+
 class Module
 {
 
@@ -46,6 +49,16 @@ class Module
                     'ModelAluno' => function ($sm) {
                      return new AlunoTable($sm->get('AlunoTableGateway'));
                 },   
+                  'ContratoTableGateway' => function ($sm) {
+                    $adapter = $sm->get('AdapterDb');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Contrato());
+
+                    return new TableGateway('contratos', $adapter, null, $resultSetPrototype);
+                },
+                    'ModelContrato' => function ($sm) {
+                     return new ContratoTable($sm->get('ContratoTableGateway'));
+                },
             )
         );
     }

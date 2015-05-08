@@ -1,0 +1,36 @@
+<?php
+$estruturaColuna = function($label, $coluna_nome) {
+    $html = '';
+    $html .= "<a title='Ordenar por $coluna_nome' href='{$this->url('contratos', ['action' => 'index'], ['query' => ['pagina' => $this->pagina_atual, 'coluna_nome' => $coluna_nome, 'coluna_sort' => ($this->coluna_nome != $coluna_nome ? 'ASC' : ($this->coluna_sort == 'DESC' ? 'ASC' : 'DESC')), 'itens_pagina' => $this->itens_pagina, 'search' => $this->search]])}'>";
+ 
+    if ($this->coluna_nome == $coluna_nome) {
+        $icon = $this->coluna_sort == 'ASC' ? '' : '-alt';
+        $html .= "<span class='glyphicon glyphicon-sort-by-attributes{$icon}'></span> ";
+    }
+ 
+    $html .= $label;
+ 
+    return $html;
+};
+?>
+<tr>
+    <th>
+        <?php echo $estruturaColuna('Nº Registro', 'id'); ?>
+    </th>
+    <th>
+        <?php echo $estruturaColuna('Valor', 'valor'); ?>
+    </th>
+    <th>
+        <?php echo $estruturaColuna('Dt. Inicio', 'data_inicio'); ?>
+    </th>
+    <th>
+        <?php echo $estruturaColuna('Dt. Fim', 'data_fim'); ?>
+    </th>
+    <th>
+        <?php echo $estruturaColuna('Dt. Cadastro', 'data_cadastro'); ?>
+    </th> 
+    <th>
+        <?php echo $estruturaColuna('Qt. Meses', 'quant_meses'); ?>
+    </th>
+    <th>Ação</th>  
+</tr>
