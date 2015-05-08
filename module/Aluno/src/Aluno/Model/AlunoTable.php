@@ -62,7 +62,6 @@ class AlunoTable {
             'telefone'              => $aluno->telefone,
             'telefone2'             => $aluno->telefone2,
             'data_nascimento'       => $aluno->data_nascimento,
-            'data_cadastro'         => $timeNow->format('Y-m-d H:i:s'), 
             'data_alteracao'        => $timeNow->format('Y-m-d H:i:s'), # data de criação igual a de atualização 
         ];
  

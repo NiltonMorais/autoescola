@@ -13,6 +13,7 @@ abstract class CrudController extends AbstractActionController
     protected $model;
     protected $route;
     protected $caminhoViews;
+    protected $colunaOrdem;
     
     
     public function indexAction()
@@ -20,7 +21,7 @@ abstract class CrudController extends AbstractActionController
         $paramsUrl = [
             'pagina_atual'  => $this->params()->fromQuery('pagina', 1),
             'itens_pagina'  => $this->params()->fromQuery('itens_pagina', 10),
-            'coluna_nome'   => $this->params()->fromQuery('coluna_nome', 'nome'),
+            'coluna_nome'   => $this->params()->fromQuery('coluna_nome', $this->colunaOrdem),
             'coluna_sort'   => $this->params()->fromQuery('coluna_sort', 'ASC'),
             'search'        => $this->params()->fromQuery('search', null),
         ];

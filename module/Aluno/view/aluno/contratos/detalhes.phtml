@@ -1,33 +1,27 @@
 <div class="panel panel-primary">
     <div class="panel-heading">
         <div class="panel-title">
-            Detalhes Aluno ID <?php echo $this->filter($data)->id(); ?>      
+            Detalhes Contrato ID <?php echo $this->filterContrato($data)->id(); ?>      
         </div>
     </div>
     <div class="panel-body">
         <dl class="dl-horizontal">
-            <dt>Nome:</dt>
-            <dd><?php echo $this->filter($data)->nomeCompleto(); ?></dd>
-            <dt>Email:</dt>
-            <dd><?php echo $this->filter($data)->email(); ?></dd>
-            <dt>Sexo:</dt>
-            <dd><?php echo $this->filter($data)->sexo(); ?></dd>
-            <dt>Idade:</dt>
-            <dd><?php echo $this->filter($data)->idade(); ?></dd>
-            <dt>Data de Nascimento:</dt>
-            <dd><?php echo $this->filter($data)->dataNascimento(); ?></dd>
-            <dt>Telefone Principal:</dt>
-            <dd><?php echo $this->filter($data)->telefone(); ?></dd>
-            <dt>Telefone Secundario:</dt>
-            <dd><?php echo $this->filter($data)->telefone2(); ?></dd>
+            <dt>Valor:</dt>
+            <dd><?php echo $this->filterContrato($data)->valor(); ?></dd>
+            <dt>Data Inicial:</dt>
+            <dd><?php echo $this->filterContrato($data)->dataInicio(); ?></dd>
+            <dt>Data de Vencimento:</dt>
+            <dd><?php echo $this->filterContrato($data)->dataFim(); ?></dd>
+            <dt>Quantidade de Meses:</dt>
+            <dd><?php echo $this->filterContrato($data)->quantMeses(); ?></dd>
             <dt>Data de Cadastro:</dt>
-            <dd><?php echo $this->filter($data)->dataCadastro(); ?></dd>
+            <dd><?php echo $this->filterContrato($data)->dataCadastro(); ?></dd>
             <dt>Data de Atualização:</dt>
-            <dd><?php echo $this->filter($data)->dataAlteracao(); ?></dd>
+            <dd><?php echo $this->filterContrato($data)->dataAlteracao(); ?></dd>
         </dl>
     </div>
     <div class="panel-footer">
-        <a href="<?php echo $this->url('alunos', array('action' => 'editar', 'id' => $this->filter($data)->id())); ?>" class="btn btn-warning btn-sm">Editar Aluno</a>
-        <a href="<?php echo $this->url('alunos'); ?>" class="btn btn-default btn-sm">Voltar</a>
+        <a href="<?php echo $this->url('contratos', array('action' => 'editar', 'id' => $this->filterContrato($data)->id())); ?>" class="btn btn-warning btn-sm">Editar Contrato</a>
+        <a href="<?php echo $this->url('contratos'); ?>" class="btn btn-default btn-sm">Voltar</a>
     </div>
 </div>

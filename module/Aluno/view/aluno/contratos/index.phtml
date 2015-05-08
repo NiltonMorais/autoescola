@@ -34,12 +34,12 @@
 <tbody>
     <?php foreach ($this->data as $dados) : ?>
         <tr>
-            <td class="text-center"><?php echo $dados->id; ?></td>
-            <td class="text-center"><?php echo $dados->valor; ?></td>
-            <td class="text-center"><?php echo $dados->data_inicio; ?></td>
-            <td class="text-center"><?php echo $dados->data_fim; ?></td>
-            <td class="text-center"><?php echo $dados->data_cadastro; ?></td>
-            <td class="text-center"><?php echo $dados->quant_meses; ?></td>
+            <td class="text-center"><?php echo $this->filterContrato($dados)->id(); ?></td>
+            <td class="text-center"><?php echo $this->filterContrato($dados)->valor(); ?></td>
+            <td class="text-center"><?php echo $this->filterContrato($dados)->dataInicio(); ?></td>
+            <td class="text-center"><?php echo $this->filterContrato($dados)->dataFim(); ?></td>
+            <td class="text-center"><?php echo $this->filterContrato($dados)->dataCadastro(); ?></td>
+            <td class="text-center"><?php echo $this->filterContrato($dados)->quantMeses(); ?></td>
             <td>
                 <a class="btn btn-xs btn-info" title="Visualizar" href="<?php echo $this->url('contratos', array("action" => "detalhes", "id" => $dados->id,)); ?>"><span class="glyphicon glyphicon-new-window"></span></a>
                 <a class="btn btn-xs btn-warning" title="Editar" href="<?php echo $this->url('contratos', array("action" => "editar", "id" => $dados->id,)); ?>"><span class="glyphicon glyphicon-edit"></span></a>

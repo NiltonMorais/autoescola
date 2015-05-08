@@ -76,7 +76,8 @@ class Module
                 },
             ),
             'invokables' => array(
-                'filter' => 'Aluno\View\Helper\AlunoFilter'
+                'filter' => 'Aluno\View\Helper\AlunoFilter',
+                'filterContrato' => 'Aluno\View\Helper\ContratoFilter'
             ),
         );
     }

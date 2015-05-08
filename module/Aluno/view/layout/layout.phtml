@@ -40,6 +40,7 @@
                   <?php
                      $url_home = $this->url('home');
                      $url_alunos = $this->url('alunos');
+                     $url_contratos = $this->url('contratos');
                      $url_sobre = $this->url('sobre');
                   ?>
                      <li <?php echo $this->menuAtivo($url_home); ?>>
@@ -47,6 +48,9 @@
                      </li>
                      <li <?php echo $this->menuAtivo($url_alunos); ?>>
                         <a href="<?php echo $url_alunos; ?>">Alunos</a>
+                     </li>
+                     <li <?php echo $this->menuAtivo($url_contratos); ?>>
+                        <a href="<?php echo $url_contratos; ?>">Contratos</a>
                      </li>
                      <li <?php echo $this->menuAtivo($url_sobre); ?>>
                         <a href="<?php echo $url_sobre; ?>">Sobre</a>
@@ -62,7 +66,7 @@
             </div>
  
             <div class="footer">
-                <p class="muted credit pull-left">Company <a href="">© 2014</a></p>
+                <p class="muted credit pull-left">Company <a href="">© 2015</a></p>
                 <p class="muted credit pull-right">Desenvolvido por <a href="http://fb.com/nilton.mrs" target="_blank">Nilton Morais</a>.</p>
             </div>
         </div>

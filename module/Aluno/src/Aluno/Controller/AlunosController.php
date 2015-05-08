@@ -10,5 +10,6 @@ class AlunosController extends CrudController
        $this->model = "Aluno\Model\Aluno";
        $this->route = "alunos";
        $this->caminhoViews = "aluno/alunos/";
+       $this->colunaOrdem = "nome";
    }
 }

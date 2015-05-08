@@ -42,7 +42,7 @@ class ContratoTable {
             'data_inicio'           => $contrato->data_inicio,
             'data_fim'              => $contrato->data_fim,
             'data_cadastro'         => $timeNow->format('Y-m-d H:i:s'),
-            'data_alteracao'        => $contrato->data_alteracao,
+            'data_alteracao'        => $timeNow->format('Y-m-d H:i:s'),
             'quant_meses'           => $contrato->quant_meses,
         ];
  
@@ -57,8 +57,7 @@ class ContratoTable {
             'valor'                 => $contrato->valor,
             'data_inicio'           => $contrato->data_inicio,
             'data_fim'              => $contrato->data_fim,
-            'data_cadastro'         => $timeNow->format('Y-m-d H:i:s'),
-            'data_alteracao'        => $contrato->data_alteracao,
+            'data_alteracao'         => $timeNow->format('Y-m-d H:i:s'),
             'quant_meses'           => $contrato->quant_meses,
         ];
  
@@ -88,7 +87,7 @@ class ContratoTable {
      * @param type $itensPaginacao
      * @return type Paginator
      */
-    public function fetchPaginator($pagina = 1, $itensPagina = 10, $ordem = 'nome ASC', $like = null, $itensPaginacao = 5) 
+    public function fetchPaginator($pagina = 1, $itensPagina = 10, $ordem = 'id ASC', $like = null, $itensPaginacao = 5) 
     {
 
         $select = (new Select('contratos'))->order($ordem);
@@ -97,8 +96,6 @@ class ContratoTable {
             $select
                     ->where
                     ->like('id', "%{$like}%")
-                    ->or
-                    ->like('data_cadastro', "%{$like}%")
             ;
         }
 

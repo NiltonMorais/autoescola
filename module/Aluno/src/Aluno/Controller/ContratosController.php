@@ -10,6 +10,7 @@ class ContratosController extends CrudController
        $this->model = "Aluno\Model\Contrato";
        $this->route = "contratos";
        $this->caminhoViews = "aluno/contratos/";
+       $this->colunaOrdem = "id";
    }
    
 }

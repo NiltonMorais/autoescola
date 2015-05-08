@@ -12,7 +12,7 @@ class Contrato extends Form{
     {
         parent::__construct('contrato');
         
-        #$this->setInputFilter(new AlunoFilter);
+        $this->setInputFilter(new ContratoFilter);
         
         $this->setAttributes(array(
             'method'    => 'post',
@@ -69,28 +69,6 @@ class Contrato extends Form{
                 'class'         => 'form-control',
                 'id'            => 'data_fim',
                 'placeholder'   => 'Data de Fim',
-                'required'      => true,
-            ),
-        ));
-        
-        $this->add(array(
-            'type' => 'Date',
-            'name' => 'data_cadastro',
-            'attributes' => array(
-                'class'         => 'form-control',
-                'id'            => 'data_cadastro',
-                'placeholder'   => 'Data de Cadastro',
-                'required'      => true,
-            ),
-        ));
-        
-        $this->add(array(
-            'type' => 'Date',
-            'name' => 'data_alteracao',
-            'attributes' => array(
-                'class'         => 'form-control',
-                'id'            => 'data_alteracao',
-                'placeholder'   => 'Data de Alteração',
                 'required'      => true,
             ),
         ));
