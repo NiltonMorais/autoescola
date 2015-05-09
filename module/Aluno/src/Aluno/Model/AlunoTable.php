@@ -23,6 +23,19 @@ class AlunoTable {
         return $this->tableGateway->select();
     }
     
+    public function fetchPairs(){
+        
+        $todos = $this->fetchAll();
+        
+        $array = array();
+        
+         
+        foreach($todos as $aluno){
+            $array[$aluno->id] = $aluno->nome;
+        }
+        return $array;
+    }
+    
     public function find($id){
         $id = (int)$id;
         $rowset = $this->tableGateway->select(array('id' => $id));

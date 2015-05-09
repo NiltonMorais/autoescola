@@ -46,9 +46,10 @@ class ContratoFilter extends InputFilter{
                 )
                 );
         
+         
         $this->add(
                 array(
-                    'name' => 'data_inicio',
+                    'name' => 'quant_meses',
                     'required' => true,
                     'filters' => array(
                         array('name' => 'StripTags'),
@@ -58,12 +59,14 @@ class ContratoFilter extends InputFilter{
                         array(
                             'name' => 'NotEmpty',
                             'options' => array(
-                                'messages' => array('isEmpty' => 'Data não pode está em branco'),
+                                'messages' => array('isEmpty' => 'Meses não pode está em branco'),
                             )
                         )
                     )
                 )
                 );
+        
+  
         
          $this->add(
                 array(

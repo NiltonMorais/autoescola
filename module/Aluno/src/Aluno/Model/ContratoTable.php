@@ -45,7 +45,7 @@ class ContratoTable {
             'data_cadastro'         => $timeNow->format('Y-m-d H:i:s'),
             'data_alteracao'        => $timeNow->format('Y-m-d H:i:s'),
             'quant_meses'           => $contrato->quant_meses,
-            'aluno_id'           => $contrato->aluno_id,
+            'aluno_id'              => $contrato->aluno_id,
         ];
  
         return $this->tableGateway->insert($data);
@@ -61,7 +61,7 @@ class ContratoTable {
             'data_fim'              => $contrato->data_fim,
             'data_alteracao'         => $timeNow->format('Y-m-d H:i:s'),
             'quant_meses'           => $contrato->quant_meses,
-            'aluno_id'           => $contrato->aluno_id,
+            'aluno_id'              => $contrato->aluno_id,
         ];
  
         $id = (int) $contrato->id;

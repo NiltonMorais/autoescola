@@ -13,4 +13,11 @@ class ContratosController extends CrudController
        $this->colunaOrdem = "id";
    }
    
+    public function novoAction()
+    {                         
+        $alunos = $this->getServiceLocator()->get("ModelAluno")->fetchPairs();
+        return ['form' => new $this->form(null, $alunos)];
+    }
+ 
+   
 }

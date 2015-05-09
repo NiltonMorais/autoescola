@@ -5,80 +5,84 @@
         </div>
     </div>
     <?php
-    $formAluno = $this->form;
-    $formAluno->setAttribute('action', $this->url('contratos', array('action' => 'adicionar')));
-    $formAluno->prepare();
-    echo $this->form()->openTag($formAluno);
+    $form = $this->form;
+    $form->setAttribute('action', $this->url('contratos', array('action' => 'adicionar')));
+    $form->prepare();
+    echo $this->form()->openTag($form);
     ?>
     <form class="form-horizontal" role="form" method="POST" action="<?php echo $this->url('contratos', array('action' => 'adicionar')); ?>">
         <div class="panel-body">
+            
+            <div class="form-group">
+                <label for="aluno_id" class="col-lg-3 col-md-3 control-label">Aluno:</label>
+                <div class="col-lg-9  col-md-9">
+                    <?php echo $this->formRow($form->get('aluno_id')); 
+                        // renderiza elemento de erro
+                        echo $this->formElementErrors()
+                        ->setMessageOpenFormat('<small class="text-danger">')
+                        ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                        ->setMessageCloseString('</small>')
+                        ->render($form->get('aluno_id'));
+                    ?>
+                </div>
+            </div>
+            
+            
             <div class="form-group">
                 <label for="valor" class="col-lg-3 col-md-3 control-label">Valor:</label>
                 <div class="col-lg-9 col-md-9">
-                    <?php echo $this->formInput($formAluno->get('valor')); 
+                    <?php echo $this->formInput($form->get('valor')); 
                         // renderiza elemento de erro
                         echo $this->formElementErrors()
                         ->setMessageOpenFormat('<small class="text-danger">')
                         ->setMessageSeparatorString('</small><br/><small class="text-danger">')
                         ->setMessageCloseString('</small>')
-                        ->render($formAluno->get('valor'));
+                        ->render($form->get('valor'));
                     ?>
                     
-                </div>
-            </div>
- 
-            <div class="form-group">
-                <label for="aluno_id" class="col-lg-3 col-md-3 control-label">Id aluno:</label>
-                <div class="col-lg-9  col-md-9">
-                    <?php echo $this->formInput($formAluno->get('aluno_id'));
-                        // renderiza elemento de erro
-                        echo $this->formElementErrors()
-                        ->setMessageOpenFormat('<small class="text-danger">')
-                        ->setMessageSeparatorString('</small><br/><small class="text-danger">')
-                        ->setMessageCloseString('</small>')
-                        ->render($formAluno->get('aluno_id'));
-                    ?>
                 </div>
             </div>
             
             <div class="form-group">
                 <label for="quant_meses" class="col-lg-3 col-md-3 control-label">Quantidade de Meses:</label>
                 <div class="col-lg-9  col-md-9">
-                    <?php echo $this->formInput($formAluno->get('quant_meses'));
+                    <?php echo $this->formInput($form->get('quant_meses'));
                         // renderiza elemento de erro
                         echo $this->formElementErrors()
                         ->setMessageOpenFormat('<small class="text-danger">')
                         ->setMessageSeparatorString('</small><br/><small class="text-danger">')
                         ->setMessageCloseString('</small>')
-                        ->render($formAluno->get('quant_meses'));
+                        ->render($form->get('quant_meses'));
                     ?>
                 </div>
             </div>
+            
             
             <div class="form-group">
                 <label for="data_inicio" class="col-lg-3 col-md-3 control-label">Data Inicial:</label>
                 <div class="col-lg-9  col-md-9">
-                    <?php echo $this->formInput($formAluno->get('data_inicio')); 
+                    <?php echo $this->formInput($form->get('data_inicio')); 
                         // renderiza elemento de erro
                         echo $this->formElementErrors()
                         ->setMessageOpenFormat('<small class="text-danger">')
                         ->setMessageSeparatorString('</small><br/><small class="text-danger">')
                         ->setMessageCloseString('</small>')
-                        ->render($formAluno->get('data_inicio'));
+                        ->render($form->get('data_inicio'));
                     ?>
                 </div>
             </div>
             
+            
             <div class="form-group">
                 <label for="data_fim" class="col-lg-3 col-md-3 control-label">Data Final:</label>
                 <div class="col-lg-9  col-md-9">
-                    <?php echo $this->formInput($formAluno->get('data_fim')); 
+                    <?php echo $this->formInput($form->get('data_fim')); 
                         // renderiza elemento de erro
                         echo $this->formElementErrors()
                         ->setMessageOpenFormat('<small class="text-danger">')
                         ->setMessageSeparatorString('</small><br/><small class="text-danger">')
                         ->setMessageCloseString('</small>')
-                        ->render($formAluno->get('data_fim'));
+                        ->render($form->get('data_fim'));
                     ?>
                 </div>
             </div>
@@ -87,9 +91,9 @@
         <div class="panel-footer">
             <?php
             // renderiza html input hidden para id
-            echo $this->formHidden($formAluno->get('id'));
+            echo $this->formHidden($form->get('id'));
             // renderiza html input hidden csrf
-            echo $this->formElement($formAluno->get('security')); 
+            echo $this->formElement($form->get('security')); 
             ?>
             <button type="submit" class="btn btn-primary">Salvar Contato</button>
             <a href="<?php echo $this->url('contratos'); ?>" class="btn btn-default">Voltar</a>

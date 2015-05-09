@@ -27,4 +27,5 @@ class Aluno {
         $this->data_alteracao       = (!empty($data['data_alteracao'])) ? $data['data_alteracao'] : null;               
        # $this->contrato_id          = (!empty($data['contrato_id'])) ? $data['contrato_id'] : null;               
     }
+    
 }

@@ -2,15 +2,19 @@
 
 namespace Aluno\Form;
 
-use Zend\Form\Form;
-
-use Zend\Form\Element;
+use Zend\Form\Form,
+    Zend\Form\Element\Select,
+    Zend\Form\Element;
 
 class Contrato extends Form{
     
-   public function __construct($name = null)
+    protected $alunos;
+    
+    public function __construct($name = null, array $alunos = null)
     {
         parent::__construct('contrato');
+        
+        $this->alunos = $alunos;
         
         $this->setInputFilter(new ContratoFilter);
         
@@ -25,7 +29,19 @@ class Contrato extends Form{
             'name' => 'id',
         ));
  
-
+           
+        $aluno = new Select();
+        $aluno->setName("aluno_id")
+               ->setAttributes(array(
+                   'class' => 'form-control',
+                   'id'            => 'aluno_id',
+                   'placeholder'   => 'Alunos',))
+               ->setOptions(array('value_options' => $this->alunos))
+               ->setDisableInArrayValidator(true);
+        $this->add($aluno);
+        
+        
+        
         $this->add(array(
             'name' => 'valor',
             'options' => array(
@@ -46,17 +62,6 @@ class Contrato extends Form{
                 'class'         => 'form-control',
                 'id'            => 'quant_meses',
                 'placeholder'   => 'Quantidade Meses',
-                'required'      => true,
-            ),
-        ));
-        
-         $this->add(array(
-            'type' => 'text',
-            'name' => 'aluno_id',
-            'attributes' => array(
-                'class'         => 'form-control',
-                'id'            => 'aluno_id',
-                'placeholder'   => 'Id do Aluno Meses',
                 'required'      => true,
             ),
         ));
