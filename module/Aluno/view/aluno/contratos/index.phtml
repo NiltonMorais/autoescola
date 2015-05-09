@@ -35,6 +35,7 @@
     <?php foreach ($this->data as $dados) : ?>
         <tr>
             <td class="text-center"><?php echo $this->filterContrato($dados)->id(); ?></td>
+            <td class="text-center"><?php echo $this->filterContrato($dados)->aluno_id(); ?></td>
             <td class="text-center"><?php echo $this->filterContrato($dados)->valor(); ?></td>
             <td class="text-center"><?php echo $this->filterContrato($dados)->dataInicio(); ?></td>
             <td class="text-center"><?php echo $this->filterContrato($dados)->dataFim(); ?></td>

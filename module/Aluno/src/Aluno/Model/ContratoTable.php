@@ -23,6 +23,7 @@ class ContratoTable {
         return $this->tableGateway->select();
     }
     
+    
     public function find($id){
         $id = (int)$id;
         $rowset = $this->tableGateway->select(array('id' => $id));
@@ -44,6 +45,7 @@ class ContratoTable {
             'data_cadastro'         => $timeNow->format('Y-m-d H:i:s'),
             'data_alteracao'        => $timeNow->format('Y-m-d H:i:s'),
             'quant_meses'           => $contrato->quant_meses,
+            'aluno_id'           => $contrato->aluno_id,
         ];
  
         return $this->tableGateway->insert($data);
@@ -59,6 +61,7 @@ class ContratoTable {
             'data_fim'              => $contrato->data_fim,
             'data_alteracao'         => $timeNow->format('Y-m-d H:i:s'),
             'quant_meses'           => $contrato->quant_meses,
+            'aluno_id'           => $contrato->aluno_id,
         ];
  
         $id = (int) $contrato->id;
@@ -74,7 +77,7 @@ class ContratoTable {
         $this->tableGateway->delete(array('id' => (int) $id));
     }
     
-    
+
     
 
     /**
