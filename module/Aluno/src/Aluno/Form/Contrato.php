@@ -50,6 +50,17 @@ class Contrato extends Form{
             ),
         ));
         
+         $this->add(array(
+            'type' => 'text',
+            'name' => 'aluno_id',
+            'attributes' => array(
+                'class'         => 'form-control',
+                'id'            => 'aluno_id',
+                'placeholder'   => 'Id do Aluno Meses',
+                'required'      => true,
+            ),
+        ));
+        
 
         $this->add(array(
             'type' => 'Date',

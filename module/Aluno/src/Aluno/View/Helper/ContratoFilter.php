@@ -9,7 +9,8 @@ class ContratoFilter extends AbstractHelper
 {
  
     protected $contrato;
- 
+
+
     public function __invoke(Contrato $contrato)
     {
         $this->contrato = $contrato;
@@ -24,6 +25,11 @@ class ContratoFilter extends AbstractHelper
         return $this->view->escapeHtml($result);
     }
     
+        public function aluno_id()
+    {
+        
+        return $this->contrato->aluno_id;
+    }
     
         public function valor()
     {
@@ -68,4 +74,6 @@ class ContratoFilter extends AbstractHelper
  
         return $this->view->escapeHtml($result);
     }
+    
 }
+
