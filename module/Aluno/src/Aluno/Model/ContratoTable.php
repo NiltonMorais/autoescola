@@ -37,6 +37,10 @@ class ContratoTable {
      public function save(Contrato $contrato)
     {
         $timeNow = new \DateTime();
+        $dataInicio = new \DateTime($contrato->data_inicio);
+        $dataFim = new \DateTime($contrato->data_fim);   
+        
+        $intervalo = $dataInicio->diff( $dataFim );
  
         $data = [
             'valor'                 => $contrato->valor,
@@ -44,7 +48,7 @@ class ContratoTable {
             'data_fim'              => $contrato->data_fim,
             'data_cadastro'         => $timeNow->format('Y-m-d H:i:s'),
             'data_alteracao'        => $timeNow->format('Y-m-d H:i:s'),
-            'quant_meses'           => $contrato->quant_meses,
+            'quant_meses'           => $intervalo->m,
             'aluno_id'              => $contrato->aluno_id,
         ];
  
@@ -54,13 +58,17 @@ class ContratoTable {
      public function update(Contrato $contrato)
     {
         $timeNow = new \DateTime();
+        $dataInicio = new \DateTime($contrato->data_inicio);
+        $dataFim = new \DateTime($contrato->data_fim);   
+        
+        $intervalo = $dataInicio->diff( $dataFim );
  
         $data = [
             'valor'                 => $contrato->valor,
             'data_inicio'           => $contrato->data_inicio,
             'data_fim'              => $contrato->data_fim,
-            'data_alteracao'         => $timeNow->format('Y-m-d H:i:s'),
-            'quant_meses'           => $contrato->quant_meses,
+            'data_alteracao'        => $timeNow->format('Y-m-d H:i:s'),
+            'quant_meses'           => $intervalo->m,
             'aluno_id'              => $contrato->aluno_id,
         ];
  
