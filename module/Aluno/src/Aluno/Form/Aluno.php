@@ -88,10 +88,14 @@ class Aluno extends Form{
         $this->add(array(
             'type' => 'Date',
             'name' => 'data_nascimento',
+            'format' => 'Y-m-d',
             'attributes' => array(
                 'class'         => 'form-control',
                 'id'            => 'data_nascimento',
                 'placeholder'   => 'Data de Nascimento',
+                'value'   => 'Data de Nascimento',
+              /*  'min'  => '2015-04-01',
+                'max'  => '2015-05-15',*/
                 'required'      => true,
             ),
         ));
