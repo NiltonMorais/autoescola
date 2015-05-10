@@ -43,20 +43,6 @@
                 </div>
             </div>
             
-            <div class="form-group">
-                <label for="quant_meses" class="col-lg-3 col-md-3 control-label">Quantidade de Meses:</label>
-                <div class="col-lg-9  col-md-9">
-                    <?php echo $this->formInput($form->get('quant_meses'));
-                        // renderiza elemento de erro
-                        echo $this->formElementErrors()
-                        ->setMessageOpenFormat('<small class="text-danger">')
-                        ->setMessageSeparatorString('</small><br/><small class="text-danger">')
-                        ->setMessageCloseString('</small>')
-                        ->render($form->get('quant_meses'));
-                    ?>
-                </div>
-            </div>
-            
             
             <div class="form-group">
                 <label for="data_inicio" class="col-lg-3 col-md-3 control-label">Data Inicial:</label>
@@ -90,9 +76,7 @@
         </div>
         <div class="panel-footer">
             <?php
-            // renderiza html input hidden para id
             echo $this->formHidden($form->get('id'));
-            // renderiza html input hidden csrf
             echo $this->formElement($form->get('security')); 
             ?>
             <button type="submit" class="btn btn-primary">Salvar Contato</button>

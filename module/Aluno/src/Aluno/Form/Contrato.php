@@ -40,7 +40,7 @@ class Contrato extends Form{
                    ))
               
                ->setValueOptions($this->alunos)
-               ->setEmptyOption('Insira um aluno')
+               ->setEmptyOption('Selecione um aluno')
                ->setDisableInArrayValidator(true);
         
         $this->add($aluno);

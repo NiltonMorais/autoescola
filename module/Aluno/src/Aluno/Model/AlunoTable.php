@@ -28,7 +28,6 @@ class AlunoTable {
         $todos = $this->fetchAll();
         
         $array = array();
-        
          
         foreach($todos as $aluno){
             $array[$aluno->id] = $aluno->nome;
