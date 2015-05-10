@@ -9,11 +9,13 @@ class ContratoFilter extends AbstractHelper
 {
  
     protected $contrato;
+    protected $alunos;
 
 
-    public function __invoke(Contrato $contrato)
+    public function __invoke(Contrato $contrato, array $alunos = null)
     {
         $this->contrato = $contrato;
+        $this->alunos = $alunos;
  
         return $this;
     }
@@ -25,11 +27,34 @@ class ContratoFilter extends AbstractHelper
         return $this->view->escapeHtml($result);
     }
     
-        public function aluno_id()
-    {
-        
-        return $this->contrato->aluno_id;
+     public function aluno_id()
+    {        
+        $result = $this->contrato->aluno_id;
+        return $this->view->escapeHtml($result);
     }
+    
+    public function aluno()
+    {
+        $partes_nome = explode(" ", ucwords(mb_strtolower($this->alunos[$this->contrato->aluno_id], "UTF-8")));
+        
+        if (count($partes_nome) <= 2) {
+            $result = join($partes_nome, " ");
+        } else {
+            $result = "{$partes_nome[0]} {$partes_nome[1]} ...";
+        }
+        
+        #$result = $this->alunos[$this->contrato->aluno_id];
+        return $this->view->escapeHtml($result);
+    }
+    
+    public function alunoCompleto()
+    {
+        $result = ucwords(mb_strtolower($this->alunos[$this->contrato->aluno_id], "UTF-8"));
+ 
+        return $this->view->escapeHtml($result);
+    }
+
+
     
         public function valor()
     {

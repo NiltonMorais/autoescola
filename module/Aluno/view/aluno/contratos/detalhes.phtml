@@ -1,21 +1,24 @@
 <div class="panel panel-primary">
     <div class="panel-heading">
         <div class="panel-title">
-            Detalhes Contrato ID <?php echo $this->filterContrato($data)->id(); ?>      
+            Detalhes Contrato Nº <?php echo $this->filterContrato($data)->id(); ?>      
         </div>
+        
+         <?php $alunos = $this->alunos; ?>
+        
     </div>
     <div class="panel-body">
         <dl class="dl-horizontal">
-            <dt>Aluno id:</dt>
-            <dd><?php echo $this->filterContrato($data)->aluno_id(); ?></dd>
+            <dt>Aluno:</dt>
+            <dd><?php echo $this->filterContrato($data, $alunos)->alunoCompleto(); ?></dd>
             <dt>Valor:</dt>
             <dd><?php echo $this->filterContrato($data)->valor(); ?></dd>
+            <dt>Quantidade de Meses:</dt>
+            <dd><?php echo $this->filterContrato($data)->quantMeses(); ?></dd>
             <dt>Data Inicial:</dt>
             <dd><?php echo $this->filterContrato($data)->dataInicio(); ?></dd>
             <dt>Data de Vencimento:</dt>
             <dd><?php echo $this->filterContrato($data)->dataFim(); ?></dd>
-            <dt>Quantidade de Meses:</dt>
-            <dd><?php echo $this->filterContrato($data)->quantMeses(); ?></dd>
             <dt>Data de Cadastro:</dt>
             <dd><?php echo $this->filterContrato($data)->dataCadastro(); ?></dd>
             <dt>Data de Atualização:</dt>

@@ -35,9 +35,14 @@ class Contrato extends Form{
                ->setAttributes(array(
                    'class' => 'form-control',
                    'id'            => 'aluno_id',
-                   'placeholder'   => 'Alunos',))
-               ->setOptions(array('value_options' => $this->alunos))
+                   'placeholder'   => 'Alunos',
+                   'required'      => true,
+                   ))
+              
+               ->setValueOptions($this->alunos)
+               ->setEmptyOption('Insira um aluno')
                ->setDisableInArrayValidator(true);
+        
         $this->add($aluno);
         
         
@@ -52,7 +57,8 @@ class Contrato extends Form{
                 'class'         => 'form-control',
                 'id'            => 'nome',
                 'placeholder'   => 'Valor',
-            ),
+                'required'      => true,
+                ),
         ));
         
         $this->add(array(
