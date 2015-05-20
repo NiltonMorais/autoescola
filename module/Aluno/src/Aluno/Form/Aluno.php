@@ -38,6 +38,77 @@ class Aluno extends Form{
                 'class'         => 'form-control',
                 'id'            => 'nome',
                 'placeholder'   => 'Nome Completo',
+                'required'      => true,
+            ),
+        ));
+        
+        $this->add(array(
+            'name' => 'end_rua',
+            'options' => array(
+               'type' => 'text',
+                'label' => 'Endereço', 
+            ),
+            'attributes' => array(
+                'class'         => 'form-control',
+                'id'            => 'end_rua',
+                'placeholder'   => 'Endereço Completo',
+                'required'      => true,
+            ),
+        ));
+        
+        $this->add(array(
+            'name' => 'end_bairro',
+            'options' => array(
+               'type' => 'text',
+                'label' => 'Bairro', 
+            ),
+            'attributes' => array(
+                'class'         => 'form-control',
+                'id'            => 'end_bairro',
+                'placeholder'   => 'Bairro',
+                'required'      => true,
+            ),
+        ));
+        
+        $this->add(array(
+            'name' => 'end_cidade',
+            'options' => array(
+               'type' => 'text',
+                'label' => 'Cidade', 
+            ),
+            'attributes' => array(
+                'class'         => 'form-control',
+                'id'            => 'end_cidade',
+                'placeholder'   => 'Cidade',
+                'required'      => true,
+            ),
+        ));
+        
+        $this->add(array(
+            'name' => 'end_estado',
+            'options' => array(
+               'type' => 'text',
+                'label' => 'Estado', 
+            ),
+            'attributes' => array(
+                'class'         => 'form-control',
+                'id'            => 'end_estado',
+                'placeholder'   => 'Estado',
+                'required'      => true,
+            ),
+        ));
+        
+        $this->add(array(
+            'name' => 'cpf',
+            'options' => array(
+               'type' => 'text',
+                'label' => 'CPF', 
+            ),
+            'attributes' => array(
+                'class'         => 'form-control',
+                'id'            => 'cpf',
+                'placeholder'   => 'CPF',
+                'required'      => true,
             ),
         ));
         
@@ -70,7 +141,7 @@ class Aluno extends Form{
             'attributes' => array(
                 'class'         => 'form-control',
                 'id'            => 'telefone',
-                'placeholder'   => 'Digite seu telefone principal',
+                'placeholder'   => 'Telefone principal',
                 'required'      => true,
             ),
         ));
@@ -81,7 +152,7 @@ class Aluno extends Form{
             'attributes' => array(
                 'class'         => 'form-control',
                 'id'            => 'telefone2',
-                'placeholder'   => 'Digite seu telefone secundário (opcional)',
+                'placeholder'   => 'Telefone secundário (opcional)',
             ),
         ));
         

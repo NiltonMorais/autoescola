@@ -2,6 +2,7 @@
  
 namespace Aluno\Controller;
 use Zend\View\Model\ViewModel;
+use DOMPDFModule\View\Model\PdfModel;
  
 class ContratosController extends CrudController
 {
@@ -11,7 +12,7 @@ class ContratosController extends CrudController
        $this->model = "Aluno\Model\Contrato";
        $this->route = "contratos";
        $this->caminhoViews = "aluno/contratos/";
-       $this->colunaOrdem = "id";
+       $this->colunaOrdem = "data_cadastro";
    }
    
    
@@ -21,7 +22,7 @@ class ContratosController extends CrudController
             'pagina_atual'  => $this->params()->fromQuery('pagina', 1),
             'itens_pagina'  => $this->params()->fromQuery('itens_pagina', 10),
             'coluna_nome'   => $this->params()->fromQuery('coluna_nome', $this->colunaOrdem),
-            'coluna_sort'   => $this->params()->fromQuery('coluna_sort', 'ASC'),
+            'coluna_sort'   => $this->params()->fromQuery('coluna_sort', 'DESC'),
             'search'        => $this->params()->fromQuery('search', null),
         ];
 
@@ -41,8 +42,10 @@ class ContratosController extends CrudController
     
     public function novoAction()
     {                         
+        $id_aluno = (int) $this->params()->fromRoute('id');
+        
         $alunos = $this->getServiceLocator()->get("ModelAluno")->fetchPairs();
-        return ['form' => new $this->form(null, $alunos)];
+        return ['form' => new $this->form(null, $alunos, $id_aluno)];
     }
  
     
@@ -51,7 +54,7 @@ class ContratosController extends CrudController
            $id = (int) $this->params()->fromRoute('id', 0);
 
            if (!$id) {
-               $this->flashMessenger()->addMessage("Cadastro não encotrado");
+               $this->flashMessenger()->addMessage("Contrato não encontrado");
 
                // redirecionar para action index
                return $this->redirect()->toRoute($this->route);
@@ -72,7 +75,64 @@ class ContratosController extends CrudController
            return array('id' => $id, 'data' => $data, 'alunos' => $alunos);
     }
     
+    public function visualizarAction()
+    {
+        $id = (int) $this->params()->fromRoute('id', 0);
+
+           if (!$id) {
+               $this->flashMessenger()->addMessage("Contrato não encontrado");
+
+               // redirecionar para action index
+               return $this->redirect()->toRoute($this->route);
+           }
+
+            try{
+                $data = $this->getServiceLocator()->get("ModelContrato")->find($id);
+                $aluno = $this->getServiceLocator()->get("ModelAluno")->find($data->aluno_id);
+            } catch (Exception $exc) {
+                  // adicionar mensagem
+                $this->flashMessenger()->addErrorMessage($exc->getMessage());
+                // redirecionar para action index
+                 return $this->redirect()->toRoute($this->route);   
+            }
+            
+           $pdf = new PdfModel();
+           $pdf->setVariables(array('id' => $id, 'data' => $data, 'aluno' => $aluno));
+           
+           return $pdf;
+              
+    }
+
     
+    
+    public function salvarpdfAction()
+    {
+        $id = (int) $this->params()->fromRoute('id', 0);
+
+           if (!$id) {
+               $this->flashMessenger()->addMessage("Contrato não encontrado");
+
+               // redirecionar para action index
+               return $this->redirect()->toRoute($this->route);
+           }
+
+            try{
+                $data = $this->getServiceLocator()->get("ModelContrato")->find($id);
+                $aluno = $this->getServiceLocator()->get("ModelAluno")->find($data->aluno_id);
+            } catch (Exception $exc) {
+                  // adicionar mensagem
+                $this->flashMessenger()->addErrorMessage($exc->getMessage());
+                // redirecionar para action index
+                 return $this->redirect()->toRoute($this->route);   
+            }
+            
+           $pdf = new PdfModel();
+           $pdf->setVariables(array('id' => $id, 'data' => $data, 'aluno' => $aluno))
+                   ->setOption('filename', 'Contrato-nº'.$data->id.'-'.$aluno->nome);
+           return $pdf;
+    }
+    
+
     
         public function adicionarAction()
     {
@@ -83,16 +143,30 @@ class ContratosController extends CrudController
             $form = new $this->form(null, $alunos);
             $form->setData($request->getPost());
             $model = new $this->model();
+            
         if ($form->isValid()) {
             
-            $model->exchangeArray($form->getData());
-            $this->getServiceLocator()->get("ModelContrato")->save($model);
+            $aluno_id = $request->getPost('aluno_id');
+            $contrato = $this->getServiceLocator()->get("ModelContrato")->findAluno($aluno_id);
             
-            $this->flashMessenger()->addSuccessMessage("Cadastro criado com sucesso");
-            return $this->redirect()->toRoute($this->route);
+            if(!empty($contrato))
+            {
+                $this->flashMessenger()->addErrorMessage("Já existe um contrato cadastrado para este o aluno");
+                return (new ViewModel())
+                            ->setVariable('form', $form)
+                            ->setTemplate($this->caminhoViews.'novo');
+            }
+            else
+            {
+                $model->exchangeArray($form->getData());
+                $this->getServiceLocator()->get("ModelContrato")->save($model);
+
+                $this->flashMessenger()->addSuccessMessage("Contrato criado com sucesso");
+                return $this->redirect()->toRoute($this->route);
+            }
         } else {
-            $this->flashMessenger()->addErrorMessage("Erro ao criar cadastro");
-           return (new ViewModel())
+            $this->flashMessenger()->addErrorMessage("Erro ao criar contrato");
+            return (new ViewModel())
                             ->setVariable('form', $form)
                             ->setTemplate($this->caminhoViews.'novo');
         }
@@ -105,7 +179,7 @@ class ContratosController extends CrudController
            $id = (int) $this->params()->fromRoute('id', 0);
 
            if (!$id) {
-               $this->flashMessenger()->addMessage("Cadastro não encotrado");
+               $this->flashMessenger()->addMessage("Contrato não encontrado");
                return $this->redirect()->toRoute($this->route);
            }
 
@@ -140,7 +214,7 @@ class ContratosController extends CrudController
             $model->exchangeArray($form->getData());
             $this->getServiceLocator()->get("ModelContrato")->update($model);
             
-            $this->flashMessenger()->addSuccessMessage("Cadastro editado com sucesso");
+            $this->flashMessenger()->addSuccessMessage("Contrato editado com sucesso");
 
             return $this->redirect()->toRoute($this->route, array("action" => "detalhes", "id" => $model->id));
         } else {
@@ -152,6 +226,5 @@ class ContratosController extends CrudController
         }
     }
     }
- 
    
 }

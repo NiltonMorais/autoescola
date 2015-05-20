@@ -8,6 +8,10 @@
         <dl class="dl-horizontal">
             <dt>Nome:</dt>
             <dd><?php echo $this->filter($data)->nomeCompleto(); ?></dd>
+            <dt>Endereço:</dt>
+            <dd><?php echo $this->filter($data)->enderecoCompleto(); ?></dd>
+            <dt>CPF:</dt>
+            <dd><?php echo $data->cpf; ?></dd>
             <dt>Email:</dt>
             <dd><?php echo $this->filter($data)->email(); ?></dd>
             <dt>Sexo:</dt>
@@ -29,5 +33,43 @@
     <div class="panel-footer">
         <a href="<?php echo $this->url('alunos', array('action' => 'editar', 'id' => $this->filter($data)->id())); ?>" class="btn btn-warning btn-sm">Editar Aluno</a>
         <a href="<?php echo $this->url('alunos'); ?>" class="btn btn-default btn-sm">Voltar</a>
+        <?php if($this->filter($data)->verificaContrato($contrato))
+            { ?>
+               <a href='<?php echo $this->url('contratos', array('action' => 'detalhes', 'id' => $contrato->id,)); ?>' class='btn btn-primary btn-sm'>Ver Contrato</a> 
+  <?php     }
+            else
+            {?>
+               <a href='<?php echo $this->url('contratos', array('action' => 'novo', 'id' => $data->id)); ?>' class='btn btn-success btn-sm'>Cadastrar Contrato</a> 
+  <?php     }
+            ?>
+         <a href='<?php echo $this->url('alunos', array('action' => 'deletar', 'id' => $data->id)); ?>' class='btn btn-danger btn-sm'>Excluir Aluno</a>
     </div>
 </div>
+
+
+
+
+
+
+
+<?php $this->headScript()->captureStart(); ?>
+$(function(){
+    // variável para conter a url deletar
+    var url_deletar     = '<?php echo $this->url('alunos', array("action" => "deletar")); ?>' + '/';
+ 
+    // qualquer link que tiver a url deletar vai sofrer um evento quando for clicada
+    $("a[href*='" + url_deletar + "']").click(function (event) {
+        // variável contendo o id referente ao botão clicado
+        var aluno_id  = $(this).attr('href').split(url_deletar).pop();
+        // variável contendo mensagem da janela
+        var mensagem = "Deseja realmente apagar o aluno de ID " + aluno_id + "?";
+        // variável com resposta da mensagem colocada na janela
+        var confirmacao = confirm(mensagem);
+ 
+        // se a confirmação for false o fluxo é interrompido
+        if (!confirmacao)
+            // elimar o evendo do botão clicado
+            event.preventDefault();
+    });
+});
+<?php $this->headScript()->captureEnd(); ?>

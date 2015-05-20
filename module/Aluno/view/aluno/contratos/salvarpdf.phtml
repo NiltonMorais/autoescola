@@ -1,0 +1,161 @@
+<?php 
+    $aluno = $this->aluno; 
+    $contrato = $this->data; 
+?>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><?php echo $aluno->nome?></title>
+        <meta charset="UTF-8">
+    </head>
+    <body>     
+        <style type="text/css">
+            h4, h5{
+                text-align: center;
+            }
+            p{
+                 text-align: justify;
+            }
+        </style>
+
+
+<h4><b><u>CONTRATO DE PRESTAÇÃO DE SERVIÇOS Nº <?php echo $this->filterContrato($data)->id(); ?> </b></u></h4>    
+<br>       
+<p>
+    De um lado o Centro de Formação de Condutores Sinal Verde Ltda., 
+    nome fantasia Auto Escola Sinal Verde, inscrita no CNPJ 14460889/0001-05, 
+    estabelecida à Travessa Leite Mendes, 21 - São Sebastião, CEP 45659-010‎ – Cento – Ilhéus - BA, 
+    doravante denominada CONTRATADA e de outro lado o aluno
+    <u><?php echo $aluno->nome; ?></u>,
+    inscrito no CPF nº
+    <u><?php echo $aluno->cpf; ?></u>,
+    residente e domiciliado à
+    <u><?php echo $aluno->end_rua.", ".$aluno->end_bairro.", ".$aluno->end_cidade."-".$aluno->end_estado; ?></u>,
+    doravante denominado CONTRATANTE, tem entre si justo e contratado o que segue:
+</p>
+
+    <br>
+    <h5><b>O OBJETO DO CONTRATO</b></h5>
+    <p>
+        <b>Cláusula 1a.</b> É objeto do presente contrato a prestação de serviço de: aulas teóricas - técnicas;
+        aulas práticas de direção em automóvel, motocicleta e ônibus;
+        aluguel do veículo para exames e marcações de exames junto ao Detran-BA.
+    </p>
+    
+    <br>
+    <h5><b>OBRIGAÇÕES DO CONTRATANTE</b></h5>
+    <p>
+        <b>Cláusula 2ª.</b> O <u>Contratante</u> deverá fornecer a <u>Contratada</u> cópia xerográfica de seus documentos pessoais,
+        Laudo, CPF, RG ou CTPS e comprovante de endereço recente,
+        para a abertura do processo de habilitação junto ao Detran-BA.
+    </p>
+
+    
+    <br>
+    <h5><b>OBRIGAÇÕES DA CONTRATADA</b></h5>
+    <p>
+        <b>Cláusula 3a.</b> A <u>Contratada</u> deverá fornecer ao <u>Contratante</u> os recibos de pagamentos, bem como uma cópia do presente contrato.
+    </p>
+    <p>
+        <b>Cláusula 4a.</b> A <u>Contratada</u> se compromete a ministrar os cursos dentro das normas estabelecidas pelo Código de Trânsito Brasileiro.
+    </p>
+    
+    
+    <br>
+    <h5><b>DOS CURSOS TEÓRICO-TÉCNICO E DE ATUALIZAÇÃO PARA RENOVAÇÃO DA C.N.H.</b></h5>
+    <p>
+        <b>Cláusula 5a.</b> Os cursos mencionados no caput desta cláusula terão validade de 12 (doze) meses a contar da data da assinatura
+        do presente contrato e laudo. Sendo que o aluno que não completar a carga horária mínima dentro
+        do prazo deverá pagá-lo novamente ou comprar a quantidade que pretender de aulas teórico-técnicas avulsas.
+    </p>
+    <p>
+         <b>Parágrafo 1º.</b> <u>Havendo desistência do Contratante, no prazo de até 07 (sete) dias
+            após a assinatura do presente contrato, o valor do curso será devolvido pela Contratada,
+            deduzidos o equivalente a 20% do valor total para suprir os custos com materiais e impostos,
+            bem como as aulas que por ventura o aluno tenha assistido.</u>
+    </p>
+    <p>
+        <b>Parágrafo 2º.</b> <u>Passando o prazo estipulado no parágrafo anterior, a importância paga não será devolvida.</u>
+    </p>
+    <p>
+        <b>Parágrafo 3º.</b> A desistência deverá ser protocolada em 02 (duas) vias na secretaria da <u>Contratada.</u>
+    </p>
+    <p>
+        <b>Parágrafo 4º.</b> O valor pago pelo curso é de R$ <u><?php echo $contrato->valor ?></u>. O valor pago pela aula teórica avulsa será de R$ <u><?php echo $contrato->valor_aula_teorica?></u>.
+    </p>
+    <p>
+        <b>Parágrafo 5º.</b> O atraso às aulas por parte do <u>Contratante</u> é de sua inteira responsabilidade, não cabendo ao instrutor prolongar a aula para repor o tempo relativo ao atraso.
+    </p>
+    <p>
+        <b>Parágrafo 6º.</b> A validação das aulas do referido curso serão chanceladas pelo sistema biométrico do Detran-BA.
+    </p>
+    <p>
+        <b>Parágrafo 7º.</b> Após a conclusão do referido curso pelo <u>Contratante</u>, deverá a <u>Contratada</u> enviar imediatamente ao Detran-BA tal informação.
+    </p>
+    <p>
+        <b>Parágrafo 8º.</b> A <u>Contratada</u> fica dispensada de enviar ao Detran-BA informações sobre curso não concluído pelo <u>Contratante</u>.
+    </p>
+    <p>
+        <b>Parágrafo 9º.</b> O <u>Contratante</u> fica responsável de se comunicar com a <u>Contratada</u> após a marcação de seu exame de legislação para saber o dia e horário de sua respectiva prova.
+    </p>
+    <p>
+        <b>Parágrafo 10º.</b> O não comparecimento do <u>Contratante</u> para a prova de legislação fará com que este deverá pagar uma nova taxa de marcação de exame. 
+    </p>
+    
+    
+    
+    <br>
+    <h5><b>DO CURSO DE PRÁTICA DE DIREÇÃO VEICULAR</b></h5>
+    <p>
+        <b>Cláusula 6a.</b> As aulas de prática de direção veicular somente serão ministradas mediante a apresentação do LADV para o instrutor.
+    </p>
+    <p>
+        <b>Parágrafo único.</b> O <u>Contratante</u> deverá no ato da retirada do LADV, reservar o seu horário para aulas práticas, podendo a <u>Contratada</u> cessar o treinamento caso o pagamento não seja efetivado.
+    </p>
+    <p>
+        <b>Cláusula 7a.</b> Não haverá reposição das aulas caso o aluno falte sem comunicar ou comunique a sua ausência com menos de 02 (duas) horas de antecedência, devendo o <u>Contratante</u> considerar que o aluno “faltou sem avisar”.
+    </p>
+    <p>
+        <b>Parágrafo 1º.</b> O atraso às aulas por parte do <u>Contratante</u> é de sua inteira responsabilidade, não cabendo ao instrutor prolongar a aula para repor o tempo relativo ao atraso.
+    </p>
+    <p>
+        <b>Parágrafo 2º.</b> A validação das aulas do referido curso serão chanceladas pela validação por sistema biométrico do aluno e do instrutor.
+    </p>
+    <p>
+        <b>Parágrafo 3º.</b> Após a conclusão do referido curso pelo <u>Contratante</u>, deverá a <u>Contratada</u> enviar a informação ao Detran-BA quando for solicitada a marcação de seu exame.
+    </p>
+    <p>
+        <b>Parágrafo 4º.</b> A <u>Contratada</u> fica dispensada de enviar ao Detran-BA informações sobre curso não concluído pelo <u>Contratante</u>.
+    </p>
+    <p>
+        <b>Parágrafo 5º.</b>  Em caso de ausência por parte do <u>Contratante</u>, por 03 (três) dias consecutivos, o mesmo perderá direito ao horário reservado.  
+    </p>
+    <p>
+        <b>Cláusula 8a.</b> <u>Havendo desistência por parte do contratante, no prazo de até 07 (sete), a importância paga será devolvida, deduzidos o equivalente a 20% do valor total para suprir os custos e impostos, bem como as aulas que por ventura o aluno tenha assistido.</u>
+    </p>
+    <p>
+        <b>Parágrafo 1º.</b> Passado o prazo estipulado, a quantia paga <u>Não</u> será devolvida.
+    </p>
+    <p>
+        <b>Parágrafo 2º.</b> Para que a devolução da importância seja efetivada, o aluno deverá apresentar os recibos e os tíquetes de aulas que ainda possuir.
+    </p>
+    <p>
+        <b>Parágrafo 3º.</b> A desistência deverá ser protocolada em 02 (duas) vias na secretaria da <u>Contratada</u>.
+    </p>
+    <p>
+        <b>Cláusula 09a.</b> O valor pago pelas aulas práticas avulsas para automóvel é R$ <u><?php echo $contrato->valor_aula_carro?></u>, para motocicleta é R$ <u><?php echo $contrato->valor_aula_moto?></u>.
+    </p>
+    <p>
+        <b>Cláusula 10a.</b> Se o <u>Contratante</u> escolher um horário de aula que já tem outro aluno na reserva, terá de entrar numa fila de espera aguardando que a <u>Contratada</u> lhe comunique o dia que começará suas aulas.
+    </p>
+    <p>
+        <b>Cláusula 11a.</b> A <u>Contratada</u> se restringe a marcar aulas de prática veicular pelo telefone.
+    </p>
+    <p>
+        <b>Cláusula 12a</b>. No dia em que estiver chovendo terá aula de prática veicular normal. Exceto para as aulas de Motocicleta.
+    </p>
+
+    
+  
+    </body>
+</html>

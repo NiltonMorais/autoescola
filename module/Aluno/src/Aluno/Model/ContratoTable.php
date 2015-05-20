@@ -34,6 +34,13 @@ class ContratoTable {
         return $row;
     }
     
+    public function findAluno($aluno_id){
+        $aluno_id = (int)$aluno_id;
+        $rowset = $this->tableGateway->select(array('aluno_id' => $aluno_id));
+        $row = $rowset->current();
+        return $row;
+    }
+    
      public function save(Contrato $contrato)
     {
         $timeNow = new \DateTime();
@@ -50,6 +57,9 @@ class ContratoTable {
             'data_alteracao'        => $timeNow->format('Y-m-d H:i:s'),
             'quant_meses'           => $intervalo->m,
             'aluno_id'              => $contrato->aluno_id,
+            'valor_aula_carro'      => $contrato->valor_aula_carro,
+            'valor_aula_moto'       => $contrato->valor_aula_moto,
+            'valor_aula_teorica'    => $contrato->valor_aula_teorica,
         ];
  
         return $this->tableGateway->insert($data);
@@ -70,6 +80,9 @@ class ContratoTable {
             'data_alteracao'        => $timeNow->format('Y-m-d H:i:s'),
             'quant_meses'           => $intervalo->m,
             'aluno_id'              => $contrato->aluno_id,
+            'valor_aula_carro'      => $contrato->valor_aula_carro,
+            'valor_aula_moto'       => $contrato->valor_aula_moto,
+            'valor_aula_teorica'    => $contrato->valor_aula_teorica,
         ];
  
         $id = (int) $contrato->id;

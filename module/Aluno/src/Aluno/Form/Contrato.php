@@ -10,11 +10,12 @@ class Contrato extends Form{
     
     protected $alunos;
     
-    public function __construct($name = null, array $alunos = null)
+    public function __construct($name = null, array $alunos = null, $id_aluno = null)
     {
         parent::__construct('contrato');
         
         $this->alunos = $alunos;
+        $this->id_aluno = $id_aluno;
         
         $this->setInputFilter(new ContratoFilter);
         
@@ -36,6 +37,7 @@ class Contrato extends Form{
                    'class' => 'form-control',
                    'id'            => 'aluno_id',
                    'placeholder'   => 'Alunos',
+                   'value'         => $this->id_aluno,
                    'required'      => true,
                    ))
               
@@ -56,7 +58,49 @@ class Contrato extends Form{
             'attributes' => array(
                 'class'         => 'form-control',
                 'id'            => 'nome',
-                'placeholder'   => 'Valor',
+                'placeholder'   => 'Valor do contrato',
+                'required'      => true,
+                ),
+        ));
+        
+        $this->add(array(
+            'name' => 'valor_aula_carro',
+            'options' => array(
+               'type' => 'text',
+                'label' => 'Valor Aula Carro', 
+            ),
+            'attributes' => array(
+                'class'         => 'form-control',
+                'id'            => 'valor_aula_carro',
+                'placeholder'   => 'Valor aula prática avulsa de carro',
+                'required'      => true,
+                ),
+        ));
+        
+        $this->add(array(
+            'name' => 'valor_aula_moto',
+            'options' => array(
+               'type' => 'text',
+                'label' => 'Valor Aulas Práticas(Moto)', 
+            ),
+            'attributes' => array(
+                'class'         => 'form-control',
+                'id'            => 'valor_aula_moto',
+                'placeholder'   => 'Valor aula prática avulsa de moto',
+                'required'      => true,
+                ),
+        ));
+        
+        $this->add(array(
+            'name' => 'valor_aula_teorica',
+            'options' => array(
+               'type' => 'text',
+                'label' => 'Valor Aula Teórica', 
+            ),
+            'attributes' => array(
+                'class'         => 'form-control',
+                'id'            => 'valor_aula_teorica',
+                'placeholder'   => 'Valor aula avulsa teórica',
                 'required'      => true,
                 ),
         ));

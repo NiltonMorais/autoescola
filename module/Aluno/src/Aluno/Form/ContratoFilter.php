@@ -46,6 +46,64 @@ class ContratoFilter extends InputFilter{
                 )
                 );
         
+        $this->add(
+                array(
+                    'name' => 'valor_aula_carro',
+                    'required' => true,
+                    'filters' => array(
+                        array('name' => 'StripTags'),
+                        array('name' => 'StringTrim')
+                    ),
+                    'validators' => array(
+                        array(
+                            'name' => 'NotEmpty',
+                            'options' => array(
+                                'messages' => array('isEmpty' => 'Valor das aulas avulsas de carro não pode está em branco'),
+                            )
+                        )
+                    )
+                )
+                );
+        
+        $this->add(
+                array(
+                    'name' => 'valor_aula_moto',
+                    'required' => true,
+                    'filters' => array(
+                        array('name' => 'StripTags'),
+                        array('name' => 'StringTrim')
+                    ),
+                    'validators' => array(
+                        array(
+                            'name' => 'NotEmpty',
+                            'options' => array(
+                                'messages' => array('isEmpty' => 'Valor das aulas avulsas de moto não pode está em branco'),
+                            )
+                        )
+                    )
+                )
+                );
+        
+        
+        $this->add(
+                array(
+                    'name' => 'valor_aula_teorica',
+                    'required' => true,
+                    'filters' => array(
+                        array('name' => 'StripTags'),
+                        array('name' => 'StringTrim')
+                    ),
+                    'validators' => array(
+                        array(
+                            'name' => 'NotEmpty',
+                            'options' => array(
+                                'messages' => array('isEmpty' => 'Valor das aulas avulsas teóricas não pode está em branco'),
+                            )
+                        )
+                    )
+                )
+                );
+        
   
         
          $this->add(
