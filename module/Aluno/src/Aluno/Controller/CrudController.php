@@ -22,7 +22,7 @@ abstract class CrudController extends AbstractActionController
             'pagina_atual'  => $this->params()->fromQuery('pagina', 1),
             'itens_pagina'  => $this->params()->fromQuery('itens_pagina', 10),
             'coluna_nome'   => $this->params()->fromQuery('coluna_nome', $this->colunaOrdem),
-            'coluna_sort'   => $this->params()->fromQuery('coluna_sort', 'ASC'),
+            'coluna_sort'   => $this->params()->fromQuery('coluna_sort', 'DESC'),
             'search'        => $this->params()->fromQuery('search', null),
         ];
 
@@ -78,7 +78,7 @@ abstract class CrudController extends AbstractActionController
            $id = (int) $this->params()->fromRoute('id', 0);
 
            if (!$id) {
-               $this->flashMessenger()->addMessage("Cadastro não encotrado");
+               $this->flashMessenger()->addMessage("Cadastro não encontrado");
 
                // redirecionar para action index
                return $this->redirect()->toRoute($this->route);
@@ -104,7 +104,7 @@ abstract class CrudController extends AbstractActionController
            $id = (int) $this->params()->fromRoute('id', 0);
 
            if (!$id) {
-               $this->flashMessenger()->addMessage("Cadastro não encotrado");
+               $this->flashMessenger()->addMessage("Cadastro não encontrado");
                return $this->redirect()->toRoute($this->route);
            }
 
@@ -156,7 +156,7 @@ abstract class CrudController extends AbstractActionController
             $id = (int) $this->params()->fromRoute('id', 0);
 
             if (!$id) {
-                $this->flashMessenger()->addMessage("Cadastro não encotrado");
+                $this->flashMessenger()->addMessage("Cadastro não encontrado");
 
             } else {
                 $this->getServiceTable()->delete($id);

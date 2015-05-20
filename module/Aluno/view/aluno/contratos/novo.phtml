@@ -43,6 +43,50 @@
                 </div>
             </div>
             
+            <div class="form-group">
+                <label for="valor_aula_teorica" class="col-lg-3 col-md-3 control-label">Valor aula teórica:</label>
+                <div class="col-lg-9 col-md-9">
+                    <?php echo $this->formInput($form->get('valor_aula_teorica')); 
+                        // renderiza elemento de erro
+                        echo $this->formElementErrors()
+                        ->setMessageOpenFormat('<small class="text-danger">')
+                        ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                        ->setMessageCloseString('</small>')
+                        ->render($form->get('valor_aula_teorica'));
+                    ?>
+                    
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="valor_aula_carro" class="col-lg-3 col-md-3 control-label">Valor aula prática(carro):</label>
+                <div class="col-lg-9 col-md-9">
+                    <?php echo $this->formInput($form->get('valor_aula_carro')); 
+                        // renderiza elemento de erro
+                        echo $this->formElementErrors()
+                        ->setMessageOpenFormat('<small class="text-danger">')
+                        ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                        ->setMessageCloseString('</small>')
+                        ->render($form->get('valor_aula_carro'));
+                    ?>
+                    
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="valor_aula_moto" class="col-lg-3 col-md-3 control-label">Valor aula prática(moto):</label>
+                <div class="col-lg-9 col-md-9">
+                    <?php echo $this->formInput($form->get('valor_aula_moto')); 
+                        // renderiza elemento de erro
+                        echo $this->formElementErrors()
+                        ->setMessageOpenFormat('<small class="text-danger">')
+                        ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                        ->setMessageCloseString('</small>')
+                        ->render($form->get('valor_aula_moto'));
+                    ?>
+                    
+                </div>
+            </div>
             
             <div class="form-group">
                 <label for="data_inicio" class="col-lg-3 col-md-3 control-label">Data Inicial:</label>

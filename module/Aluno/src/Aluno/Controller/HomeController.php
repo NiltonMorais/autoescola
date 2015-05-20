@@ -9,8 +9,10 @@ class HomeController extends AbstractActionController
   
     public function indexAction()
     {
-        $adapter = $this->getServiceLocator()->get('AdapterDb');
-        return new ViewModel();
+        $alunos = $this->getServiceLocator()->get("ModelAluno")->fetchAll();
+        $contratos = $this->getServiceLocator()->get("ModelContrato")->fetchAll();
+        
+        return new ViewModel(array('alunos' => $alunos, 'contratos' => $contratos));
     }
     
     public function sobreAction()

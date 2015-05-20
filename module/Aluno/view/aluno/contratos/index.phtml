@@ -16,7 +16,7 @@
     <form class="form-inline pull-right" role="form">
         <div class="form-group">
             <label class="sr-only" for="localizar">Buscar...</label>
-            <input type="search" name="search" value="<?php echo $this->search; ?>" class="form-control" id="localizar" placeholder="Bucar...">
+            <input type="search" name="search" value="<?php echo $this->search; ?>" class="form-control" id="localizar" placeholder="Buscar ... (nº contrato)">
         </div>
         <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
     </form>
@@ -36,7 +36,6 @@
         <tr>
             <td class="text-center"><?php echo $this->filterContrato($dados)->id(); ?></td>
             <td class="text-center"><?php echo $this->filterContrato($dados, $alunos)->aluno(); ?></td>
-            <td class="text-center"><?php echo $this->filterContrato($dados)->valor(); ?></td>
             <td class="text-center"><?php echo $this->filterContrato($dados)->dataInicio(); ?></td>
             <td class="text-center"><?php echo $this->filterContrato($dados)->dataFim(); ?></td>
             <td class="text-center"><?php echo $this->filterContrato($dados)->dataCadastro(); ?></td>
@@ -87,7 +86,7 @@ $(function(){
         // variável contendo o id referente ao botão clicado
         var aluno_id  = $(this).attr('href').split(url_deletar).pop();
         // variável contendo mensagem da janela
-        var mensagem = "Deseja realmente apagar o aluno de ID " + aluno_id + "?";
+        var mensagem = "Deseja realmente apagar o contrato de ID " + aluno_id + "?";
         // variável com resposta da mensagem colocada na janela
         var confirmacao = confirm(mensagem);
  

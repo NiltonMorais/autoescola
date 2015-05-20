@@ -57,7 +57,12 @@ class AlunoTable {
             'telefone2'             => $aluno->telefone2,
             'data_nascimento'       => $aluno->data_nascimento,
             'data_cadastro'         => $timeNow->format('Y-m-d H:i:s'), 
-            'data_alteracao'        => $timeNow->format('Y-m-d H:i:s'), # data de criação igual a de atualização 
+            'data_alteracao'        => $timeNow->format('Y-m-d H:i:s'),
+            'cpf'                   => $aluno->cpf,
+            'end_rua'               => $aluno->end_rua,
+            'end_bairro'            => $aluno->end_bairro,
+            'end_cidade'            => $aluno->end_cidade,
+            'end_estado'            => $aluno->end_estado,
         ];
  
         return $this->tableGateway->insert($data);
@@ -74,7 +79,12 @@ class AlunoTable {
             'telefone'              => $aluno->telefone,
             'telefone2'             => $aluno->telefone2,
             'data_nascimento'       => $aluno->data_nascimento,
-            'data_alteracao'        => $timeNow->format('Y-m-d H:i:s'), # data de criação igual a de atualização 
+            'data_alteracao'        => $timeNow->format('Y-m-d H:i:s'), 
+            'cpf'                   => $aluno->cpf,
+            'end_rua'               => $aluno->end_rua,
+            'end_bairro'            => $aluno->end_bairro,
+            'end_cidade'            => $aluno->end_cidade,
+            'end_estado'            => $aluno->end_estado,
         ];
  
         $id = (int) $aluno->id;
@@ -114,11 +124,6 @@ class AlunoTable {
                     ->like('id', "%{$like}%")
                     ->or
                     ->like('nome', "%{$like}%")
-                    ->or
-                    ->like('telefone', "%{$like}%")
-                    ->or
-                    ->like('data_cadastro', "%{$like}%")
-                    ->or
             ;
         }
 

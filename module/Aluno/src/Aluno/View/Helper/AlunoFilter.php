@@ -8,7 +8,7 @@ use Aluno\Model\Aluno;
 class AlunoFilter extends AbstractHelper
 {
  
-    protected $aluno;
+    protected $aluno;   
  
     public function __invoke(Aluno $aluno)
     {
@@ -42,6 +42,12 @@ class AlunoFilter extends AbstractHelper
     {
         $result = ucwords(mb_strtolower($this->aluno->nome, "UTF-8"));
  
+        return $this->view->escapeHtml($result);
+    }
+    
+    public function enderecoCompleto()
+    {
+        $result = $this->aluno->end_rua.", ".$this->aluno->end_bairro.", ".$this->aluno->end_cidade."-".$this->aluno->end_estado;
         return $this->view->escapeHtml($result);
     }
  
@@ -88,9 +94,20 @@ class AlunoFilter extends AbstractHelper
     
     public function sexo()
     {
-        $result = $this->aluno->sexo;
+        if($this->aluno->sexo == "m")
+        {
+            $result = "Masculino";
+        }
+        else if($this->aluno->sexo == "f")
+        {
+            $result = "Feminino";
+        }
+        else {
+            $result = $this->aluno->sexo;
+        }
         return $this->view->escapeHtml($result);
     }
+    
     
      public function idade()
     {
@@ -114,6 +131,17 @@ class AlunoFilter extends AbstractHelper
         $result = (new \DateTime($this->aluno->data_nascimento))->format('d/m/Y');
 
         return $this->view->escapeHtml($result);
+    }
+    
+    public function verificaContrato($contrato)
+    {
+        if(isset($contrato->id))
+        {
+            return true;
+        }
+        else{
+             return false;
+        }
     }
  
 }

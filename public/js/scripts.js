@@ -17,4 +17,8 @@ $(function () {
 $(function (){
     // mascara para telefone: (xx) xxxx-xxxxx
     $("input#telefone, input#telefone2").mask("(99) 9999-9999?9");
+    
+    // mascara para CPF: xxx.xxx.xxx-xx
+    $("input#cpf").mask("999.999.999-99");
+   
 });
