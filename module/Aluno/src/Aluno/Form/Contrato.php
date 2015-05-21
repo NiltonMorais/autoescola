@@ -55,10 +55,15 @@ class Contrato extends Form{
                'type' => 'text',
                 'label' => 'Valor', 
             ),
+
             'attributes' => array(
                 'class'         => 'form-control',
                 'id'            => 'nome',
                 'placeholder'   => 'Valor do contrato',
+                'size'          => '10',
+                'maxlength'     => '10',
+                'onkeydown'     => 'FormataMoeda(this,10,event)',
+                'onkeypress'    => 'return maskKeyPress(event)',
                 'required'      => true,
                 ),
         ));
@@ -73,6 +78,10 @@ class Contrato extends Form{
                 'class'         => 'form-control',
                 'id'            => 'valor_aula_carro',
                 'placeholder'   => 'Valor aula prática avulsa de carro',
+                'size'          => '10',
+                'maxlength'     => '10',
+                'onkeydown'     => 'FormataMoeda(this,10,event)',
+                'onkeypress'    => 'return maskKeyPress(event)',
                 'required'      => true,
                 ),
         ));
@@ -87,6 +96,10 @@ class Contrato extends Form{
                 'class'         => 'form-control',
                 'id'            => 'valor_aula_moto',
                 'placeholder'   => 'Valor aula prática avulsa de moto',
+                'size'          => '10',
+                'maxlength'     => '10',
+                'onkeydown'     => 'FormataMoeda(this,10,event)',
+                'onkeypress'    => 'return maskKeyPress(event)',
                 'required'      => true,
                 ),
         ));
@@ -101,6 +114,10 @@ class Contrato extends Form{
                 'class'         => 'form-control',
                 'id'            => 'valor_aula_teorica',
                 'placeholder'   => 'Valor aula avulsa teórica',
+                'size'          => '10',
+                'maxlength'     => '10',
+                'onkeydown'     => 'FormataMoeda(this,10,event)',
+                'onkeypress'    => 'return maskKeyPress(event)',
                 'required'      => true,
                 ),
         ));
